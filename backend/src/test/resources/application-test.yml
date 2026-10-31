@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/bwjobs_test}
+    username: ${TEST_DB_USER:bwjobs}
+    password: ${TEST_DB_PASSWORD:bwjobs}
+app:
+  seed:
+    enabled: false
+  scan:
+    enabled: false
+    per-host-delay-ms: 0
+    use-browser-fallback: false
+  storage:
+    dir: target/test-files
+  ai:
+    api-key: test-key
+    daily-limit-per-user: 50

@@ -1,0 +1,72 @@
+server:
+  port: 8080
+  # Trust X-Forwarded-* from the reverse proxy (nginx / vite) so same-origin requests are recognised
+  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: bw-student-jobs
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bwjobs}
+    username: ${DB_USER:bwjobs}
+    password: ${DB_PASSWORD:bwjobs}
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 25MB
+  thymeleaf:
+    check-template-location: false
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  # Security
+  jwt-secret: ${APP_JWT_SECRET:dev-only-secret-change-me-dev-only-secret-change-me}
+  jwt-ttl-hours: 72
+  admin-emails: ${APP_ADMIN_EMAILS:}
+  cors-origins: ${APP_CORS_ORIGINS:http://localhost:*,http://127.0.0.1:*}
+
+  # File storage (documents are AES-GCM encrypted at rest)
+  storage:
+    dir: ${APP_STORAGE_DIR:./data/files}
+    encryption-key: ${APP_STORAGE_KEY:}
+
+  # Company seed list
+  seed:
+    enabled: ${APP_SEED_ENABLED:true}
+
+  # Career page scanning
+  scan:
+    enabled: ${APP_SCAN_ENABLED:true}
+    workers: ${APP_SCAN_WORKERS:4}
+    default-interval-hours: 12
+    min-interval-hours: 6
+    max-interval-hours: 48
+    user-agent: "${APP_SCAN_USER_AGENT:BWStudentJobsBot/0.1 (+https://github.com/your-org/bw-student-jobs; contact admin@example.org)}"
+    per-host-delay-ms: 2000
+    request-timeout-seconds: 25
+    max-detail-pages-per-company: 60
+    use-browser-fallback: ${APP_SCAN_BROWSER:true}
+
+  # Headless browser (Playwright). Leave empty to use Playwright's own browser lookup.
+  browser:
+    executable-path: ${APP_BROWSER_PATH:}
+    headless: true
+
+  # Claude API
+  ai:
+    api-key: ${ANTHROPIC_API_KEY:}
+    base-url: ${ANTHROPIC_BASE_URL:}
+    model: ${CLAUDE_MODEL:claude-opus-5-5}
+    daily-limit-per-user: ${APP_AI_DAILY_LIMIT:60}
+    language-fallback: ${APP_AI_LANGUAGE_FALLBACK:false}

@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: bwjobs
+      POSTGRES_USER: bwjobs
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-bwjobs}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./scripts/create-test-db.sql:/docker-entrypoint-initdb.d/10-test-db.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bwjobs -d bwjobs"]
+      interval: 5s
+      retries: 20
+
+  backend:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/bwjobs
+      DB_USER: bwjobs
+      DB_PASSWORD: ${DB_PASSWORD:-bwjobs}
+      APP_JWT_SECRET: ${APP_JWT_SECRET:?set APP_JWT_SECRET in .env (at least 32 characters)}
+      APP_STORAGE_KEY: ${APP_STORAGE_KEY:?set APP_STORAGE_KEY in .env (openssl rand -base64 32)}
+      APP_ADMIN_EMAILS: ${APP_ADMIN_EMAILS:-}
+      APP_CORS_ORIGINS: ${APP_CORS_ORIGINS:-http://localhost:*,http://127.0.0.1:*}
+      APP_SCAN_ENABLED: ${APP_SCAN_ENABLED:-true}
+      APP_SCAN_WORKERS: ${APP_SCAN_WORKERS:-4}
+      APP_SCAN_USER_AGENT: ${APP_SCAN_USER_AGENT:-BWStudentJobsBot/0.1 (+https://example.org/bot)}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      CLAUDE_MODEL: ${CLAUDE_MODEL:-claude-opus-5-5}
+      APP_AI_DAILY_LIMIT: ${APP_AI_DAILY_LIMIT:-60}
+      APP_AI_LANGUAGE_FALLBACK: ${APP_AI_LANGUAGE_FALLBACK:-false}
+    volumes:
+      - files:/data
+    ports:
+      - "8080:8080"
+    shm_size: "1gb"   # Chromium needs more shared memory than Docker's default
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  db-data:
+  files:

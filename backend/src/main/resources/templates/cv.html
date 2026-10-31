@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${de} ? 'de' : 'en'">
+<head>
+<meta charset="UTF-8"/>
+<style>
+  @page { size: A4; margin: 16mm 16mm 16mm 16mm; }
+  body { font-family: 'Body', Helvetica, Arial, sans-serif; font-size: 10pt; color: #1f2933; line-height: 1.35; }
+  h1 { font-size: 20pt; margin: 0; color: #102a43; }
+  .headline { font-size: 11pt; color: #486581; margin: 2pt 0 6pt 0; }
+  .contact { font-size: 9pt; color: #52606d; border-bottom: 1.5pt solid #334e68; padding-bottom: 6pt; margin-bottom: 8pt; }
+  h2 { font-size: 11.5pt; text-transform: uppercase; letter-spacing: 0.6pt; color: #334e68; margin: 10pt 0 4pt 0;
+       border-bottom: 0.5pt solid #bcccdc; padding-bottom: 2pt; }
+  .entry { margin-bottom: 6pt; page-break-inside: avoid; }
+  .row { width: 100%; }
+  .heading { font-weight: bold; }
+  .period { float: right; color: #52606d; font-size: 9pt; }
+  .sub { color: #486581; font-size: 9.5pt; }
+  ul { margin: 2pt 0 0 0; padding-left: 12pt; }
+  li { margin-bottom: 1.5pt; }
+  .skills span { display: inline-block; border: 0.5pt solid #9fb3c8; border-radius: 3pt; padding: 1pt 4pt; margin: 0 3pt 3pt 0; font-size: 9pt; }
+</style>
+</head>
+<body>
+  <h1 th:text="${name}">Name</h1>
+  <div class="headline" th:if="${cv.headline}" th:text="${cv.headline}">Headline</div>
+  <div class="contact" th:text="${contact}">contact</div>
+
+  <div th:if="${cv.summary}">
+    <h2 th:text="${de} ? 'Profil' : 'Profile'">Profile</h2>
+    <div th:text="${cv.summary}">summary</div>
+  </div>
+
+  <div th:if="${cv.skills != null and !cv.skills.isEmpty()}">
+    <h2 th:text="${de} ? 'Kenntnisse' : 'Skills'">Skills</h2>
+    <div class="skills"><span th:each="s : ${cv.skills}" th:text="${s}">skill</span></div>
+  </div>
+
+  <div th:each="sec : ${cv.sections}">
+    <h2 th:text="${sec.title}">Section</h2>
+    <div class="entry" th:each="e : ${sec.entries}">
+      <div class="row">
+        <span class="period" th:if="${e.period}" th:text="${e.period}">2023 - 2024</span>
+        <span class="heading" th:text="${e.heading}">Heading</span>
+      </div>
+      <div class="sub" th:if="${e.subheading}" th:text="${e.subheading}">Org</div>
+      <ul th:if="${e.bullets != null and !e.bullets.isEmpty()}">
+        <li th:each="b : ${e.bullets}" th:text="${b}">bullet</li>
+      </ul>
+    </div>
+  </div>
+
+  <div th:if="${languages}">
+    <h2 th:text="${de} ? 'Sprachen' : 'Languages'">Languages</h2>
+    <div th:text="${languages}">German (C1)</div>
+  </div>
+</body>
+</html>

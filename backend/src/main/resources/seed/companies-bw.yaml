@@ -1,0 +1,351 @@
+# Curated seed list: companies with sites in Baden-Württemberg that hire IT students.
+#
+# - website is the anchor. Career pages and the ATS are auto-discovered from it on the first scan.
+# - careerUrl is an optional hint. If it is wrong, discovery falls back to the website.
+# - ats is an optional "TYPE:tenant" hint (see AtsType).
+# - Entries are only added once; edit companies later in the admin UI.
+# - URLs are NOT verified at build time; companies whose page can't be reached become NEEDS_REVIEW/BROKEN.
+#
+# size: L = large corporation, M = Mittelstand, S = small/startup, R = research institute, P = public sector
+
+companies:
+  # ---------------- Software, IT services, consulting ----------------
+  - {name: SAP SE, website: https://www.sap.com, careerUrl: https://jobs.sap.com, city: Walldorf, industry: Software, size: L}
+  - {name: Schwarz Gruppe (Lidl / Kaufland / Schwarz Digits), website: https://gruppe.schwarz, careerUrl: https://jobs.schwarz, city: Neckarsulm, industry: Retail / IT, size: L}
+  - {name: Vector Informatik, website: https://www.vector.com, city: Stuttgart, industry: Automotive Software, size: L}
+  - {name: ETAS, website: https://www.etas.com, city: Stuttgart, industry: Automotive Software, size: L}
+  - {name: MHP Management- und IT-Beratung, website: https://www.mhp.com, city: Ludwigsburg, industry: IT Consulting, size: L}
+  - {name: TeamViewer, website: https://www.teamviewer.com, city: Göppingen, industry: Software, size: L}
+  - {name: IONOS, website: https://www.ionos.de, city: Karlsruhe, industry: Cloud / Hosting, size: L}
+  - {name: Atruvia, website: https://www.atruvia.de, city: Karlsruhe, industry: Banking IT, size: L}
+  - {name: CAS Software, website: https://www.cas.de, city: Karlsruhe, industry: Software, size: M}
+  - {name: Bechtle, website: https://www.bechtle.com, city: Neckarsulm, industry: IT Services, size: L}
+  - {name: USU Software, website: https://www.usu.com, city: Möglingen, industry: Software, size: M}
+  - {name: Exxeta, website: https://exxeta.com, city: Karlsruhe, industry: IT Consulting, size: M}
+  - {name: inovex, website: https://www.inovex.de, city: Karlsruhe, industry: IT Consulting, size: M}
+  - {name: Novatec Consulting, website: https://www.novatec-gmbh.de, city: Leinfelden-Echterdingen, industry: IT Consulting, size: M}
+  - {name: andrena objects, website: https://www.andrena.de, city: Karlsruhe, industry: Software Development, size: M}
+  - {name: Seeburger, website: https://www.seeburger.com, city: Bretten, industry: Software, size: M}
+  - {name: PTV Group, website: https://www.ptvgroup.com, city: Karlsruhe, industry: Mobility Software, size: M}
+  - {name: init SE, website: https://www.initse.com, city: Karlsruhe, industry: Mobility Software, size: M}
+  - {name: WIBU-SYSTEMS, website: https://www.wibu.com, city: Karlsruhe, industry: Software Security, size: M}
+  - {name: STP Informationstechnologie, website: https://www.stp-online.de, city: Karlsruhe, industry: Legal Software, size: M}
+  - {name: Blue Yonder, website: https://blueyonder.com, city: Karlsruhe, industry: Supply Chain Software, size: L}
+  - {name: SNP Group, website: https://www.snpgroup.com, city: Heidelberg, industry: SAP Software, size: M}
+  - {name: Haufe Group, website: https://www.haufegroup.com, city: Freiburg im Breisgau, industry: Software / Media, size: L}
+  - {name: JobRad, website: https://www.jobrad.org, city: Freiburg im Breisgau, industry: Mobility / Platform, size: M}
+  - {name: GFT Technologies, website: https://www.gft.com, city: Stuttgart, industry: IT Services, size: L}
+  - {name: diconium, website: https://diconium.com, city: Stuttgart, industry: Digital Agency, size: M}
+  - {name: Wilken Software Group, website: https://www.wilken.de, city: Ulm, industry: Software, size: M}
+  - {name: Sybit, website: https://www.sybit.de, city: Radolfzell, industry: SAP Consulting, size: M}
+  - {name: Forcam, website: https://forcam.com, city: Ravensburg, industry: Industrial Software, size: M}
+  - {name: Nexus AG, website: https://www.nexus-ag.de, city: Donaueschingen, industry: Healthcare Software, size: M}
+  - {name: Komm.ONE, website: https://www.komm.one, city: Stuttgart, industry: Public IT, size: P}
+  - {name: BITBW (IT Baden-Württemberg), website: https://www.bitbw.de, city: Stuttgart, industry: Public IT, size: P}
+  - {name: Allianz (Standort Stuttgart), website: https://www.allianz.de, careerUrl: https://careers.allianz.com, city: Stuttgart, industry: Insurance, size: L}
+  - {name: IBM Deutschland Research & Development, website: https://www.ibm.com/de-de, careerUrl: https://www.ibm.com/careers, city: Böblingen, industry: IT / Research, size: L}
+  - {name: Hewlett Packard Enterprise (Böblingen), website: https://www.hpe.com, careerUrl: https://careers.hpe.com, city: Böblingen, industry: IT, size: L}
+  - {name: Accenture (Stuttgart), website: https://www.accenture.com/de-de, city: Stuttgart, industry: Consulting, size: L}
+  - {name: Capgemini (Stuttgart), website: https://www.capgemini.com/de-de, city: Stuttgart, industry: Consulting, size: L}
+  - {name: Deloitte (Stuttgart), website: https://www2.deloitte.com/de, city: Stuttgart, industry: Consulting, size: L}
+  - {name: PwC (Stuttgart), website: https://www.pwc.de, city: Stuttgart, industry: Consulting, size: L}
+  - {name: KPMG (Stuttgart), website: https://kpmg.com/de, city: Stuttgart, industry: Consulting, size: L}
+  - {name: EY (Stuttgart), website: https://www.ey.com/de_de, city: Stuttgart, industry: Consulting, size: L}
+  - {name: adesso (Stuttgart), website: https://www.adesso.de, city: Stuttgart, industry: IT Consulting, size: L}
+  - {name: Sopra Steria (Stuttgart), website: https://www.soprasteria.de, city: Stuttgart, industry: IT Consulting, size: L}
+  - {name: NTT DATA (Stuttgart), website: https://de.nttdata.com, city: Stuttgart, industry: IT Consulting, size: L}
+  - {name: Cognizant Mobility, website: https://www.cognizant-mobility.com, city: Stuttgart, industry: Automotive IT, size: L}
+  - {name: Porsche Consulting, website: https://www.porsche-consulting.com, city: Bietigheim-Bissingen, industry: Consulting, size: L}
+  - {name: Bertrandt, website: https://www.bertrandt.com, city: Ehningen, industry: Engineering Services, size: L}
+  - {name: Thales Deutschland, website: https://www.thalesgroup.com/de, city: Ditzingen, industry: Transport / Defence IT, size: L}
+  - {name: Harman Becker Automotive Systems, website: https://www.harman.com, city: Karlsbad, industry: Automotive Electronics, size: L}
+  - {name: Siemens (Standort Karlsruhe), website: https://www.siemens.com/de, careerUrl: https://jobs.siemens.com, city: Karlsruhe, industry: Automation / Software, size: L}
+
+  # ---------------- AI, data & tech startups ----------------
+  - {name: Aleph Alpha, website: https://aleph-alpha.com, city: Heidelberg, industry: AI, size: S}
+  - {name: Black Forest Labs, website: https://bfl.ai, city: Freiburg im Breisgau, industry: AI, size: S}
+  - {name: Sereact, website: https://sereact.ai, city: Stuttgart, industry: AI Robotics, size: S}
+  - {name: NEURA Robotics, website: https://neura-robotics.com, city: Metzingen, industry: Robotics, size: M}
+  - {name: Vialytics, website: https://www.vialytics.com, city: Stuttgart, industry: AI / Infrastructure, size: S}
+  - {name: paretos, website: https://www.paretos.com, city: Heidelberg, industry: AI Forecasting, size: S}
+  - {name: Instagrid, website: https://www.instagrid.co, city: Ludwigsburg, industry: Energy Hardware, size: S}
+  - {name: INERATEC, website: https://www.ineratec.de, city: Karlsruhe, industry: Climate Tech, size: S}
+  - {name: Volocopter, website: https://www.volocopter.com, city: Bruchsal, industry: Aviation, size: M}
+  - {name: cellcentric, website: https://www.cellcentric.net, city: Kirchheim unter Teck, industry: Fuel Cells, size: M}
+  - {name: IPAI (Innovation Park Artificial Intelligence), website: https://www.ipai.de, city: Heilbronn, industry: AI Ecosystem, size: S}
+  - {name: Cyber Valley, website: https://cyber-valley.de, city: Tübingen, industry: AI Research Network, size: R}
+  - {name: CureVac, website: https://www.curevac.com, city: Tübingen, industry: Biotech, size: M}
+  - {name: Immatics, website: https://immatics.com, city: Tübingen, industry: Biotech, size: M}
+
+  # ---------------- Automotive & mobility ----------------
+  - {name: Robert Bosch, website: https://www.bosch.de, careerUrl: https://www.bosch.de/karriere/, ats: "SMARTRECRUITERS:BoschGroup", city: Gerlingen, industry: Automotive / Technology, size: L}
+  - {name: Mercedes-Benz Group, website: https://group.mercedes-benz.com, careerUrl: https://jobs.mercedes-benz.com, city: Stuttgart, industry: Automotive, size: L}
+  - {name: Porsche, website: https://www.porsche.com, careerUrl: https://jobs.porsche.com, city: Stuttgart, industry: Automotive, size: L}
+  - {name: Daimler Truck, website: https://www.daimlertruck.com, city: Leinfelden-Echterdingen, industry: Automotive, size: L}
+  - {name: AUDI (Standort Neckarsulm), website: https://www.audi.com, careerUrl: https://www.audi.com/de/karriere.html, city: Neckarsulm, industry: Automotive, size: L}
+  - {name: ZF Friedrichshafen, website: https://www.zf.com, city: Friedrichshafen, industry: Automotive Supplier, size: L}
+  - {name: MAHLE, website: https://www.mahle.com, city: Stuttgart, industry: Automotive Supplier, size: L}
+  - {name: MANN+HUMMEL, website: https://www.mann-hummel.com, city: Ludwigsburg, industry: Filtration, size: L}
+  - {name: ElringKlinger, website: https://www.elringklinger.de, city: Dettingen an der Erms, industry: Automotive Supplier, size: L}
+  - {name: Eberspächer, website: https://www.eberspaecher.com, city: Esslingen am Neckar, industry: Automotive Supplier, size: L}
+  - {name: Valeo (Bietigheim-Bissingen), website: https://www.valeo.com, city: Bietigheim-Bissingen, industry: Automotive Supplier, size: L}
+  - {name: Marquardt, website: https://www.marquardt.com, city: Rietheim-Weilheim, industry: Automotive Electronics, size: L}
+  - {name: Schaeffler (Standort Bühl), website: https://www.schaeffler.de, city: Bühl, industry: Automotive Supplier, size: L}
+  - {name: Witzenmann, website: https://www.witzenmann.com, city: Pforzheim, industry: Automotive Supplier, size: L}
+  - {name: Recaro Aircraft Seating, website: https://www.recaro-as.com, city: Schwäbisch Hall, industry: Aviation Supplier, size: M}
+  - {name: Kendrion (Villingen), website: https://www.kendrion.com, city: Villingen-Schwenningen, industry: Electromechanics, size: M}
+  - {name: IMS Gear, website: https://www.imsgear.com, city: Donaueschingen, industry: Automotive Supplier, size: M}
+  - {name: Hymer (Erwin Hymer Group), website: https://www.erwinhymergroup.com, city: Bad Waldsee, industry: Vehicles, size: L}
+
+  # ---------------- Machinery, automation, electronics ----------------
+  - {name: TRUMPF, website: https://www.trumpf.com, city: Ditzingen, industry: Machine Tools / Lasers, size: L}
+  - {name: Festo, website: https://www.festo.com, city: Esslingen am Neckar, industry: Automation, size: L}
+  - {name: Dürr, website: https://www.durr.com, city: Bietigheim-Bissingen, industry: Mechanical Engineering, size: L}
+  - {name: STIHL, website: https://www.stihl.de, city: Waiblingen, industry: Power Tools, size: L}
+  - {name: Kärcher, website: https://www.kaercher.com, city: Winnenden, industry: Cleaning Technology, size: L}
+  - {name: Carl Zeiss, website: https://www.zeiss.de, city: Oberkochen, industry: Optics, size: L}
+  - {name: Heidelberger Druckmaschinen, website: https://www.heidelberg.com, city: Wiesloch, industry: Printing Machines, size: L}
+  - {name: Voith, website: https://www.voith.com, city: Heidenheim an der Brenz, industry: Mechanical Engineering, size: L}
+  - {name: Liebherr (Standorte BW), website: https://www.liebherr.com, city: Biberach an der Riß, industry: Machinery, size: L}
+  - {name: SICK, website: https://www.sick.com, city: Waldkirch, industry: Sensors, size: L}
+  - {name: Testo, website: https://www.testo.com, city: Titisee-Neustadt, industry: Measurement, size: L}
+  - {name: Endress+Hauser (Maulburg), website: https://www.endress.com, city: Maulburg, industry: Measurement, size: L}
+  - {name: Balluff, website: https://www.balluff.com, city: Neuhausen auf den Fildern, industry: Sensors, size: L}
+  - {name: Pilz, website: https://www.pilz.com, city: Ostfildern, industry: Automation, size: M}
+  - {name: Leuze electronic, website: https://www.leuze.com, city: Owen, industry: Sensors, size: M}
+  - {name: Pepperl+Fuchs, website: https://www.pepperl-fuchs.com, city: Mannheim, industry: Automation, size: L}
+  - {name: ABB (Mannheim), website: https://global.abb, city: Mannheim, industry: Electrical Engineering, size: L}
+  - {name: SEW-EURODRIVE, website: https://www.sew-eurodrive.de, city: Bruchsal, industry: Drive Technology, size: L}
+  - {name: Bruker (Ettlingen), website: https://www.bruker.com, city: Ettlingen, industry: Scientific Instruments, size: L}
+  - {name: Würth Elektronik, website: https://www.we-online.com, city: Waldenburg, industry: Electronics, size: L}
+  - {name: Adolf Würth, website: https://www.wuerth.de, city: Künzelsau, industry: Trade / Logistics IT, size: L}
+  - {name: ebm-papst, website: https://www.ebmpapst.com, city: Mulfingen, industry: Fans / Motors, size: L}
+  - {name: Ziehl-Abegg, website: https://www.ziehl-abegg.com, city: Künzelsau, industry: Fans / Motors, size: L}
+  - {name: Bürkert Fluid Control Systems, website: https://www.burkert.com, city: Ingelfingen, industry: Fluid Control, size: M}
+  - {name: Optima packaging group, website: https://www.optima-packaging.com, city: Schwäbisch Hall, industry: Packaging Machines, size: M}
+  - {name: Herrenknecht, website: https://www.herrenknecht.com, city: Schwanau, industry: Tunnel Boring, size: L}
+  - {name: Hansgrohe, website: https://www.hansgrohe.de, city: Schiltach, industry: Sanitary, size: L}
+  - {name: Duravit, website: https://www.duravit.de, city: Hornberg, industry: Sanitary, size: L}
+  - {name: Wittenstein, website: https://www.wittenstein.de, city: Igersheim, industry: Mechatronics, size: M}
+  - {name: SCHUNK, website: https://schunk.com, city: Lauffen am Neckar, industry: Gripping Systems, size: M}
+  - {name: Gühring, website: https://www.guehring.com, city: Albstadt, industry: Tools, size: L}
+  - {name: Heller, website: https://www.heller.biz, city: Nürtingen, industry: Machine Tools, size: M}
+  - {name: INDEX-Werke, website: https://www.index-werke.de, city: Esslingen am Neckar, industry: Machine Tools, size: M}
+  - {name: HOMAG, website: https://www.homag.com, city: Schopfloch, industry: Woodworking Machines, size: L}
+  - {name: Groz-Beckert, website: https://www.groz-beckert.com, city: Albstadt, industry: Textile Technology, size: L}
+  - {name: Bizerba, website: https://www.bizerba.com, city: Balingen, industry: Weighing Technology, size: L}
+  - {name: Metabo, website: https://www.metabo.com, city: Nürtingen, industry: Power Tools, size: M}
+  - {name: fischer group, website: https://www.fischer.group, city: Waldachtal, industry: Fixings, size: L}
+  - {name: Schuler, website: https://www.schulergroup.com, city: Göppingen, industry: Presses, size: L}
+  - {name: WMF, website: https://www.wmf.com, city: Geislingen an der Steige, industry: Consumer Goods, size: L}
+  - {name: LAPP, website: https://www.lapp.com, city: Stuttgart, industry: Cables / Connectivity, size: L}
+  - {name: Coperion, website: https://www.coperion.com, city: Stuttgart, industry: Process Engineering, size: L}
+  - {name: MAPAL, website: https://www.mapal.com, city: Aalen, industry: Tools, size: L}
+  - {name: Leitz, website: https://www.leitz.org, city: Oberkochen, industry: Tools, size: M}
+  - {name: VARTA, website: https://www.varta-ag.com, city: Ellwangen, industry: Batteries, size: L}
+  - {name: Wieland, website: https://www.wieland.com, city: Ulm, industry: Metals, size: L}
+  - {name: Magirus, website: https://www.magirusgroup.com, city: Ulm, industry: Vehicles, size: M}
+  - {name: Gardena, website: https://www.gardena.com, city: Ulm, industry: Consumer Goods, size: L}
+  - {name: Uhlmann Pac-Systeme, website: https://www.uhlmann.de, city: Laupheim, industry: Packaging Machines, size: M}
+  - {name: ifm (Tettnang), website: https://www.ifm.com, city: Tettnang, industry: Sensors, size: L}
+  - {name: Rolls-Royce Power Systems, website: https://www.rolls-royce.com, city: Friedrichshafen, industry: Engines, size: L}
+  - {name: Airbus Defence and Space (Immenstaad), website: https://www.airbus.com, city: Immenstaad, industry: Aerospace, size: L}
+  - {name: Diehl Defence, website: https://www.diehl.com, city: Überlingen, industry: Defence, size: L}
+  - {name: HENSOLDT (Ulm), website: https://www.hensoldt.net, city: Ulm, industry: Sensors / Defence, size: L}
+  - {name: Hekatron Brandschutz, website: https://www.hekatron-brandschutz.de, city: Sulzburg, industry: Fire Protection, size: M}
+  - {name: MEIKO, website: https://www.meiko.de, city: Offenburg, industry: Dishwashing Technology, size: M}
+  - {name: Binder, website: https://www.binder-world.com, city: Tuttlingen, industry: Lab Equipment, size: M}
+  - {name: Manz, website: https://www.manz.com, city: Reutlingen, industry: Automation, size: M}
+  - {name: Walter AG, website: https://www.walter-tools.com, city: Tübingen, industry: Tools, size: L}
+  - {name: Freudenberg, website: https://www.freudenberg.com, city: Weinheim, industry: Technology Group, size: L}
+  - {name: John Deere (Mannheim), website: https://www.deere.de, city: Mannheim, industry: Agricultural Machines, size: L}
+  - {name: Caterpillar Energy Solutions (Mannheim), website: https://www.caterpillar.com, city: Mannheim, industry: Energy Systems, size: L}
+  - {name: Hohner, website: https://www.hohner.de, city: Trossingen, industry: Musical Instruments, size: M}
+  - {name: Märklin, website: https://www.maerklin.de, city: Göppingen, industry: Consumer Goods, size: M}
+  - {name: Junghans, website: https://www.junghans.de, city: Schramberg, industry: Watches, size: S}
+
+  # ---------------- Energy & utilities ----------------
+  - {name: EnBW, website: https://www.enbw.com, city: Karlsruhe, industry: Energy, size: L}
+  - {name: Netze BW, website: https://www.netze-bw.de, city: Stuttgart, industry: Energy Grid, size: L}
+  - {name: TransnetBW, website: https://www.transnetbw.de, city: Stuttgart, industry: Energy Grid, size: L}
+  - {name: MVV Energie, website: https://www.mvv.de, city: Mannheim, industry: Energy, size: L}
+  - {name: badenova, website: https://www.badenova.de, city: Freiburg im Breisgau, industry: Energy, size: M}
+  - {name: Stadtwerke Karlsruhe, website: https://www.stadtwerke-karlsruhe.de, city: Karlsruhe, industry: Utilities, size: M}
+  - {name: Stadtwerke Stuttgart, website: https://www.stadtwerke-stuttgart.de, city: Stuttgart, industry: Utilities, size: M}
+  - {name: Stadtwerke Ulm/Neu-Ulm, website: https://www.swu.de, city: Ulm, industry: Utilities, size: M}
+  - {name: Stadtwerke Heidelberg, website: https://www.swhd.de, city: Heidelberg, industry: Utilities, size: M}
+
+  # ---------------- Banking & insurance ----------------
+  - {name: LBBW, website: https://www.lbbw.de, city: Stuttgart, industry: Banking, size: L}
+  - {name: L-Bank, website: https://www.l-bank.de, city: Karlsruhe, industry: Banking, size: L}
+  - {name: W&W (Wüstenrot & Württembergische), website: https://www.ww-ag.com, city: Kornwestheim, industry: Insurance / Banking, size: L}
+  - {name: SV SparkassenVersicherung, website: https://www.sparkassenversicherung.de, city: Stuttgart, industry: Insurance, size: L}
+  - {name: Bausparkasse Schwäbisch Hall, website: https://www.schwaebisch-hall.de, city: Schwäbisch Hall, industry: Banking, size: L}
+  - {name: WGV Versicherungen, website: https://www.wgv.de, city: Stuttgart, industry: Insurance, size: M}
+  - {name: Stuttgarter Versicherung, website: https://www.stuttgarter.de, city: Stuttgart, industry: Insurance, size: M}
+  - {name: Hallesche Krankenversicherung, website: https://www.hallesche.de, city: Stuttgart, industry: Insurance, size: M}
+  - {name: BBBank, website: https://www.bbbank.de, city: Karlsruhe, industry: Banking, size: L}
+  - {name: Volksbank Stuttgart, website: https://www.volksbank-stuttgart.de, city: Stuttgart, industry: Banking, size: M}
+  - {name: Baden-Württembergische Bank, website: https://www.bw-bank.de, city: Stuttgart, industry: Banking, size: L}
+  - {name: Kreissparkasse Esslingen-Nürtingen, website: https://www.ksk-es.de, city: Esslingen am Neckar, industry: Banking, size: M}
+  - {name: Sparkasse Karlsruhe, website: https://www.sparkasse-karlsruhe.de, city: Karlsruhe, industry: Banking, size: M}
+  - {name: Sparkasse Heidelberg, website: https://www.sparkasse-heidelberg.de, city: Heidelberg, industry: Banking, size: M}
+  - {name: Sparkasse Ulm, website: https://www.sparkasse-ulm.de, city: Ulm, industry: Banking, size: M}
+  - {name: Sparkasse Freiburg-Nördlicher Breisgau, website: https://www.sparkasse-freiburg.de, city: Freiburg im Breisgau, industry: Banking, size: M}
+  - {name: Kreissparkasse Ludwigsburg, website: https://www.ksklb.de, city: Ludwigsburg, industry: Banking, size: M}
+  - {name: Kreissparkasse Böblingen, website: https://www.kskbb.de, city: Böblingen, industry: Banking, size: M}
+
+  # ---------------- Retail, consumer, media ----------------
+  - {name: dm-drogerie markt, website: https://www.dm.de, city: Karlsruhe, industry: Retail, size: L}
+  - {name: dmTECH, website: https://www.dmtech.de, city: Karlsruhe, industry: Retail IT, size: L}
+  - {name: Müller Handels GmbH, website: https://www.mueller.de, city: Ulm, industry: Retail, size: L}
+  - {name: Breuninger, website: https://www.breuninger.com, city: Stuttgart, industry: Fashion / E-Commerce, size: L}
+  - {name: HUGO BOSS, website: https://group.hugoboss.com, city: Metzingen, industry: Fashion, size: L}
+  - {name: Ritter Sport, website: https://www.ritter-sport.de, city: Waldenbuch, industry: Food, size: M}
+  - {name: Ravensburger, website: https://www.ravensburger.de, city: Ravensburg, industry: Toys / Games, size: L}
+  - {name: VAUDE, website: https://www.vaude.com, city: Tettnang, industry: Outdoor Apparel, size: M}
+  - {name: Intersport Deutschland, website: https://www.intersport.de, city: Heilbronn, industry: Retail, size: L}
+  - {name: Bauhaus, website: https://www.bauhaus.info, city: Mannheim, industry: Retail, size: L}
+  - {name: Hubert Burda Media (Offenburg), website: https://www.burda.com, city: Offenburg, industry: Media, size: L}
+  - {name: SWR Südwestrundfunk, website: https://www.swr.de, city: Stuttgart, industry: Media, size: L}
+  - {name: Lamy, website: https://www.lamy.com, city: Heidelberg, industry: Consumer Goods, size: M}
+  - {name: EDEKA Südwest, website: https://www.edeka-suedwest.de, city: Offenburg, industry: Retail, size: L}
+  - {name: Südzucker, website: https://www.suedzucker.com, city: Mannheim, industry: Food, size: L}
+  - {name: PHOENIX group, website: https://www.phoenixgroup.eu, city: Mannheim, industry: Pharma Wholesale, size: L}
+  - {name: Fuchs SE, website: https://www.fuchs.com, city: Mannheim, industry: Lubricants, size: L}
+
+  # ---------------- Pharma, medtech, health ----------------
+  - {name: Roche Diagnostics (Mannheim), website: https://www.roche.de, city: Mannheim, industry: Pharma / Diagnostics, size: L}
+  - {name: Boehringer Ingelheim (Biberach), website: https://www.boehringer-ingelheim.com, city: Biberach an der Riß, industry: Pharma, size: L}
+  - {name: Vetter Pharma, website: https://www.vetter-pharma.com, city: Ravensburg, industry: Pharma, size: L}
+  - {name: Rentschler Biopharma, website: https://www.rentschler-biopharma.com, city: Laupheim, industry: Biopharma, size: M}
+  - {name: Teva / ratiopharm, website: https://www.teva.de, city: Ulm, industry: Pharma, size: L}
+  - {name: Takeda (Singen), website: https://www.takeda.com/de-de, city: Singen, industry: Pharma, size: L}
+  - {name: Pfizer (Freiburg), website: https://www.pfizer.de, city: Freiburg im Breisgau, industry: Pharma, size: L}
+  - {name: Aesculap (B. Braun), website: https://www.bbraun.de, city: Tuttlingen, industry: Medtech, size: L}
+  - {name: KARL STORZ, website: https://www.karlstorz.com, city: Tuttlingen, industry: Medtech, size: L}
+  - {name: Erbe Elektromedizin, website: https://www.erbe-med.com, city: Tübingen, industry: Medtech, size: M}
+  - {name: Paul Hartmann, website: https://www.hartmann.info, city: Heidenheim an der Brenz, industry: Medical Products, size: L}
+  - {name: Stryker (Freiburg), website: https://www.stryker.com/de, city: Freiburg im Breisgau, industry: Medtech, size: L}
+  - {name: Dr. Falk Pharma, website: https://www.drfalkpharma.de, city: Freiburg im Breisgau, industry: Pharma, size: M}
+
+  # ---------------- Materials, chemicals, construction ----------------
+  - {name: Heidelberg Materials, website: https://www.heidelbergmaterials.com, city: Heidelberg, industry: Building Materials, size: L}
+  - {name: Bilfinger, website: https://www.bilfinger.com, city: Mannheim, industry: Industrial Services, size: L}
+  - {name: Ed. Züblin (STRABAG), website: https://www.zueblin.de, city: Stuttgart, industry: Construction, size: L}
+  - {name: Wolff & Müller, website: https://www.wolff-mueller.de, city: Stuttgart, industry: Construction, size: M}
+  - {name: Uzin Utz, website: https://www.uzin-utz.com, city: Ulm, industry: Building Chemicals, size: M}
+
+  # ---------------- Logistics & transport ----------------
+  - {name: Stuttgarter Straßenbahnen (SSB), website: https://www.ssb-ag.de, city: Stuttgart, industry: Public Transport, size: M}
+  - {name: Karlsruher Verkehrsverbund (KVV), website: https://www.kvv.de, city: Karlsruhe, industry: Public Transport, size: M}
+  - {name: Flughafen Stuttgart, website: https://www.stuttgart-airport.com, city: Leinfelden-Echterdingen, industry: Aviation, size: M}
+  - {name: Messe Stuttgart, website: https://www.messe-stuttgart.de, city: Stuttgart, industry: Trade Fairs, size: M}
+
+  # ---------------- Research institutes ----------------
+  - {name: Fraunhofer-Gesellschaft (Institute in BW), website: https://www.fraunhofer.de, careerUrl: https://www.fraunhofer.de/de/jobs-und-karriere.html, city: Stuttgart, industry: Applied Research, size: R}
+  - {name: DLR Deutsches Zentrum für Luft- und Raumfahrt (Standorte BW), website: https://www.dlr.de, city: Stuttgart, industry: Aerospace Research, size: R}
+  - {name: FZI Forschungszentrum Informatik, website: https://www.fzi.de, city: Karlsruhe, industry: IT Research, size: R}
+  - {name: Max-Planck-Institut für Intelligente Systeme, website: https://is.mpg.de, city: Stuttgart, industry: AI Research, size: R}
+  - {name: DKFZ Deutsches Krebsforschungszentrum, website: https://www.dkfz.de, city: Heidelberg, industry: Medical Research, size: R}
+  - {name: EMBL Heidelberg, website: https://www.embl.org, city: Heidelberg, industry: Life Science Research, size: R}
+  - {name: HITS Heidelberger Institut für Theoretische Studien, website: https://www.h-its.org, city: Heidelberg, industry: Computational Research, size: R}
+  - {name: ARENA2036, website: https://www.arena2036.de, city: Stuttgart, industry: Mobility Research, size: R}
+  - {name: Hahn-Schickard, website: https://www.hahn-schickard.de, city: Villingen-Schwenningen, industry: Microsystems Research, size: R}
+  - {name: ZSW Zentrum für Sonnenenergie- und Wasserstoff-Forschung, website: https://www.zsw-bw.de, city: Stuttgart, industry: Energy Research, size: R}
+  - {name: NMI Naturwissenschaftliches und Medizinisches Institut, website: https://www.nmi.de, city: Reutlingen, industry: Research, size: R}
+  - {name: KIT Karlsruher Institut für Technologie, website: https://www.kit.edu, city: Karlsruhe, industry: University / Research, size: R}
+
+  # ---------------- More software & IT ----------------
+  - {name: Avira (Gen Digital), website: https://www.avira.com, city: Tettnang, industry: IT Security, size: L}
+  - {name: Mercedes-Benz Tech Innovation, website: https://www.mercedes-benz-techinnovation.com, city: Ulm, industry: Automotive Software, size: L}
+  - {name: Mercedes-Benz.io, website: https://www.mercedes-benz.io, city: Stuttgart, industry: Software, size: M}
+  - {name: CGI (Stuttgart), website: https://www.cgi.com/de/de, city: Leinfelden-Echterdingen, industry: IT Consulting, size: L}
+  - {name: DEKRA, website: https://www.dekra.com, city: Stuttgart, industry: Testing / Inspection, size: L}
+  - {name: M&M Software, website: https://www.mm-software.com, city: St. Georgen, industry: Industrial Software, size: M}
+  - {name: GIGATRONIK, website: https://www.gigatronik.com, city: Stuttgart, industry: Automotive Engineering, size: M}
+  - {name: United Internet / 1&1 (Karlsruhe), website: https://www.united-internet.de, city: Karlsruhe, industry: Internet, size: L}
+  - {name: Jedox, website: https://www.jedox.com, city: Freiburg im Breisgau, industry: Software, size: M}
+  - {name: sevDesk, website: https://sevdesk.de, city: Offenburg, industry: SaaS, size: M}
+  - {name: abas Software (Forterro), website: https://abas-erp.com, city: Karlsruhe, industry: ERP Software, size: M}
+  - {name: DATAGROUP, website: https://www.datagroup.de, city: Pliezhausen, industry: IT Services, size: L}
+  - {name: DXC Technology (Böblingen), website: https://dxc.com, city: Böblingen, industry: IT Services, size: L}
+  - {name: HP Inc. (Böblingen), website: https://www.hp.com/de-de, careerUrl: https://jobs.hp.com, city: Böblingen, industry: IT Hardware, size: L}
+  - {name: Dassault Systèmes (Stuttgart), website: https://www.3ds.com/de, city: Stuttgart, industry: Engineering Software, size: L}
+  - {name: codecentric (Karlsruhe / Stuttgart), website: https://www.codecentric.de, city: Karlsruhe, industry: IT Consulting, size: M}
+  - {name: iteratec (Stuttgart), website: https://www.iteratec.com, city: Stuttgart, industry: IT Consulting, size: M}
+  - {name: Horváth, website: https://www.horvath-partners.com, city: Stuttgart, industry: Consulting, size: L}
+  - {name: Quantum Brilliance, website: https://quantumbrilliance.com, city: Stuttgart, industry: Quantum Computing, size: S}
+  - {name: Q.ANT, website: https://qant.com, city: Stuttgart, industry: Photonic Computing, size: S}
+
+  # ---------------- More industry & Mittelstand ----------------
+  - {name: Ensinger, website: https://www.ensingerplastics.com, city: Nufringen, industry: Plastics, size: L}
+  - {name: Festool, website: https://www.festool.com, city: Wendlingen, industry: Power Tools, size: L}
+  - {name: Kässbohrer Geländefahrzeug, website: https://www.kaessbohrer.com, city: Laupheim, industry: Vehicles, size: M}
+  - {name: Weishaupt, website: https://www.weishaupt.de, city: Schwendi, industry: Heating Technology, size: L}
+  - {name: LIQUI MOLY, website: https://www.liqui-moly.com, city: Ulm, industry: Lubricants, size: M}
+  - {name: Gerhard Schubert, website: https://www.schubert.group, city: Crailsheim, industry: Packaging Machines, size: M}
+  - {name: Bausch+Ströbel, website: https://www.bausch-stroebel.com, city: Ilshofen, industry: Pharma Machines, size: M}
+  - {name: Groninger, website: https://www.groninger.de, city: Crailsheim, industry: Pharma Machines, size: M}
+  - {name: Syntegon Technology, website: https://www.syntegon.com, city: Waiblingen, industry: Packaging Machines, size: L}
+  - {name: Belden / Hirschmann (Neckartenzlingen), website: https://www.belden.com, city: Neckartenzlingen, industry: Industrial Networking, size: L}
+  - {name: Murrelektronik, website: https://www.murrelektronik.com, city: Oppenweiler, industry: Automation, size: M}
+  - {name: R. STAHL, website: https://r-stahl.com, city: Waldenburg, industry: Explosion Protection, size: M}
+  - {name: MAFELL, website: https://www.mafell.de, city: Oberndorf am Neckar, industry: Power Tools, size: M}
+  - {name: Heckler & Koch, website: https://www.heckler-koch.com, city: Oberndorf am Neckar, industry: Defence, size: M}
+  - {name: KERN-LIEBERS, website: https://www.kern-liebers.com, city: Schramberg, industry: Springs / Stamping, size: L}
+  - {name: WEBER-HYDRAULIK, website: https://www.weber-hydraulik.com, city: Güglingen, industry: Hydraulics, size: M}
+  - {name: Rheinmetall (Neckarsulm), website: https://www.rheinmetall.com, city: Neckarsulm, industry: Automotive / Defence, size: L}
+  - {name: ILLIG Maschinenbau, website: https://www.illig.de, city: Heilbronn, industry: Machinery, size: M}
+  - {name: Magna PT (Untergruppenbach), website: https://www.magna.com, city: Untergruppenbach, industry: Automotive Supplier, size: L}
+  - {name: Läpple, website: https://www.laepple.de, city: Heilbronn, industry: Automotive Supplier, size: M}
+  - {name: ProMinent, website: https://www.prominent.com, city: Heidelberg, industry: Fluid Technology, size: L}
+  - {name: Heidelberg Engineering, website: https://www.heidelbergengineering.com, city: Heidelberg, industry: Medtech, size: M}
+  - {name: Dr. Willmar Schwabe, website: https://www.schwabe.de, city: Karlsruhe, industry: Pharma, size: L}
+  - {name: Alstom (Mannheim), website: https://www.alstom.com, city: Mannheim, industry: Rail Technology, size: L}
+  - {name: Physik Instrumente (PI), website: https://www.physikinstrumente.com, city: Karlsruhe, industry: Precision Motion, size: M}
+  - {name: Polytec, website: https://www.polytec.com, city: Waldbronn, industry: Optical Measurement, size: M}
+  - {name: Agilent Technologies (Waldbronn), website: https://www.agilent.com, city: Waldbronn, industry: Lab Instruments, size: L}
+  - {name: Koehler Paper, website: https://www.koehlerpaper.com, city: Oberkirch, industry: Paper, size: L}
+  - {name: Sedus Stoll, website: https://www.sedus.com, city: Waldshut-Tiengen, industry: Office Furniture, size: M}
+  - {name: RAFI, website: https://www.rafi-group.com, city: Berg, industry: Electronics, size: M}
+  - {name: PFISTERER, website: https://www.pfisterer.com, city: Winterbach, industry: Energy Technology, size: M}
+  - {name: Würth Industrie Service, website: https://www.wuerth-industrie.com, city: Bad Mergentheim, industry: Industrial Supply, size: L}
+  - {name: Berner Group, website: https://www.berner-group.com, city: Künzelsau, industry: Trade, size: L}
+  - {name: GEMÜ, website: https://www.gemu-group.com, city: Ingelfingen, industry: Valves, size: M}
+  - {name: LAUDA, website: https://www.lauda.de, city: Lauda-Königshofen, industry: Temperature Control, size: M}
+  - {name: Hermle, website: https://www.hermle.de, city: Gosheim, industry: Machine Tools, size: M}
+  - {name: CHIRON Group, website: https://chiron-group.com, city: Tuttlingen, industry: Machine Tools, size: M}
+  - {name: Carthago, website: https://www.carthago.com, city: Aulendorf, industry: Vehicles, size: M}
+  - {name: Dethleffs, website: https://www.dethleffs.de, city: Isny im Allgäu, industry: Vehicles, size: M}
+  - {name: Steiff, website: https://www.steiff.com, city: Giengen an der Brenz, industry: Consumer Goods, size: S}
+  - {name: BITZER, website: https://www.bitzer.de, city: Sindelfingen, industry: Refrigeration, size: L}
+  - {name: Leica Biosystems (Nussloch), website: https://www.leicabiosystems.com, city: Nußloch, industry: Medtech, size: L}
+  - {name: Heidelberg Pharma, website: https://heidelberg-pharma.com, city: Ladenburg, industry: Biotech, size: S}
+  - {name: Pfenning Logistics, website: https://www.pfenning-logistics.com, city: Heddesheim, industry: Logistics, size: L}
+  - {name: Seifert Logistics, website: https://www.seifert-logistics.com, city: Ulm, industry: Logistics, size: M}
+  - {name: Leonhard Weiss, website: https://www.leonhard-weiss.de, city: Göppingen, industry: Construction, size: L}
+  - {name: Drees & Sommer, website: https://www.dreso.com, city: Stuttgart, industry: Real Estate Consulting, size: L}
+  - {name: Fichtner, website: https://www.fichtner.de, city: Stuttgart, industry: Engineering Consulting, size: L}
+  - {name: Werner Sobek, website: https://www.wernersobek.com, city: Stuttgart, industry: Engineering, size: M}
+
+  # ---------------- More finance, media, transport ----------------
+  - {name: SDK Süddeutsche Krankenversicherung, website: https://www.sdk.de, city: Fellbach, industry: Insurance, size: M}
+  - {name: BGV Badische Versicherungen, website: https://www.bgv.de, city: Karlsruhe, industry: Insurance, size: M}
+  - {name: Kreissparkasse Reutlingen, website: https://www.ksk-reutlingen.de, city: Reutlingen, industry: Banking, size: M}
+  - {name: Kreissparkasse Waiblingen, website: https://www.kskwn.de, city: Waiblingen, industry: Banking, size: M}
+  - {name: Kreissparkasse Heilbronn, website: https://www.ksk-heilbronn.de, city: Heilbronn, industry: Banking, size: M}
+  - {name: Sparkasse Pforzheim Calw, website: https://www.sparkasse-pforzheim-calw.de, city: Pforzheim, industry: Banking, size: M}
+  - {name: Sparkasse Rhein Neckar Nord, website: https://www.sparkasse-rhein-neckar-nord.de, city: Mannheim, industry: Banking, size: M}
+  - {name: Sparkasse Bodensee, website: https://www.sparkasse-bodensee.de, city: Friedrichshafen, industry: Banking, size: M}
+  - {name: Südwestdeutsche Medienholding (SWMH), website: https://www.swmh.de, city: Stuttgart, industry: Media, size: L}
+  - {name: Badische Zeitung, website: https://www.badische-zeitung.de, city: Freiburg im Breisgau, industry: Media, size: M}
+  - {name: SWEG Südwestdeutsche Landesverkehrs-GmbH, website: https://www.sweg.de, city: Lahr, industry: Public Transport, size: M}
+  - {name: Albtal-Verkehrs-Gesellschaft (AVG), website: https://www.avg.info, city: Karlsruhe, industry: Public Transport, size: M}
+  - {name: Rhein-Neckar-Verkehr (rnv), website: https://www.rnv-online.de, city: Mannheim, industry: Public Transport, size: M}
+
+  # ---------------- More research ----------------
+  - {name: ZEW Leibniz-Zentrum für Europäische Wirtschaftsforschung, website: https://www.zew.de, city: Mannheim, industry: Economic Research, size: R}
+  - {name: GESIS Leibniz-Institut für Sozialwissenschaften (Mannheim), website: https://www.gesis.org, city: Mannheim, industry: Data / Social Research, size: R}
+  - {name: FKFS Forschungsinstitut für Kraftfahrwesen und Fahrzeugmotoren Stuttgart, website: https://www.fkfs.de, city: Stuttgart, industry: Automotive Research, size: R}
+  - {name: Steinbeis, website: https://www.steinbeis.de, city: Stuttgart, industry: Technology Transfer, size: R}

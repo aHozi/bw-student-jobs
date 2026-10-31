@@ -1,0 +1,393 @@
+# Cities and towns in Baden-Württemberg (used to decide if a job location is in BW).
+# One per line, umlauts allowed. Ambiguous names that also exist elsewhere are avoided.
+Stuttgart
+Karlsruhe
+Mannheim
+Freiburg im Breisgau
+Freiburg
+Heidelberg
+Ulm
+Heilbronn
+Pforzheim
+Reutlingen
+Esslingen am Neckar
+Esslingen
+Ludwigsburg
+Tübingen
+Villingen-Schwenningen
+Konstanz
+Aalen
+Sindelfingen
+Schwäbisch Gmünd
+Friedrichshafen
+Offenburg
+Göppingen
+Waiblingen
+Baden-Baden
+Böblingen
+Heidenheim an der Brenz
+Heidenheim
+Rastatt
+Leonberg
+Bruchsal
+Lörrach
+Kornwestheim
+Fellbach
+Weinheim
+Kehl
+Ravensburg
+Nürtingen
+Filderstadt
+Bietigheim-Bissingen
+Kirchheim unter Teck
+Schwäbisch Hall
+Lahr
+Leinfelden-Echterdingen
+Ostfildern
+Ettlingen
+Biberach an der Riß
+Biberach
+Wiesloch
+Walldorf
+Bad Rappenau
+Backnang
+Albstadt
+Sinsheim
+Ditzingen
+Gerlingen
+Ehningen
+Herrenberg
+Weil am Rhein
+Rottenburg am Neckar
+Leimen
+Mosbach
+Tuttlingen
+Balingen
+Neckarsulm
+Crailsheim
+Bühl
+Bad Mergentheim
+Rottweil
+Metzingen
+Waldkirch
+Emmendingen
+Ellwangen
+Hockenheim
+Schwetzingen
+Mühlacker
+Achern
+Winnenden
+Remseck am Neckar
+Vaihingen an der Enz
+Bretten
+Calw
+Wertheim
+Öhringen
+Künzelsau
+Weingarten
+Nagold
+Radolfzell
+Laupheim
+Ehingen
+Oberkochen
+Bad Waldsee
+Leutkirch
+Wangen im Allgäu
+Überlingen
+Immenstaad
+Markdorf
+Tettnang
+Meersburg
+Donaueschingen
+Trossingen
+Spaichingen
+Schramberg
+Oberndorf am Neckar
+Freudenstadt
+Horb am Neckar
+Hechingen
+Mössingen
+Pfullingen
+Dettingen an der Erms
+Bad Urach
+Neuhausen auf den Fildern
+Wendlingen
+Plochingen
+Wernau
+Denkendorf
+Waldenbuch
+Holzgerlingen
+Renningen
+Weil der Stadt
+Korntal-Münchingen
+Möglingen
+Asperg
+Markgröningen
+Marbach am Neckar
+Freiberg am Neckar
+Besigheim
+Lauffen am Neckar
+Brackenheim
+Eppingen
+Weinsberg
+Bad Friedrichshall
+Neckarwestheim
+Möckmühl
+Waldenburg
+Mulfingen
+Ingelfingen
+Igersheim
+Gaildorf
+Murrhardt
+Welzheim
+Schorndorf
+Weinstadt
+Kernen im Remstal
+Remshalden
+Heubach
+Bopfingen
+Giengen an der Brenz
+Herbrechtingen
+Königsbronn
+Langenau
+Blaubeuren
+Dornstadt
+Illerkirchberg
+Munderkingen
+Riedlingen
+Bad Saulgau
+Sigmaringen
+Meßkirch
+Stockach
+Gottmadingen
+Rielasingen
+Allensbach
+Bad Säckingen
+Wehr
+Schopfheim
+Maulburg
+Müllheim
+Neuenburg am Rhein
+Staufen im Breisgau
+Bad Krozingen
+Breisach am Rhein
+Titisee-Neustadt
+Schluchsee
+Lenzkirch
+Denzlingen
+Gundelfingen
+Umkirch
+Kenzingen
+Ettenheim
+Haslach im Kinzigtal
+Hausach
+Wolfach
+Schiltach
+Hornberg
+Gengenbach
+Oberkirch
+Renchen
+Appenweier
+Willstätt
+Rheinau
+Gaggenau
+Gernsbach
+Kuppenheim
+Iffezheim
+Sinzheim
+Bühlertal
+Malsch
+Rheinstetten
+Stutensee
+Eggenstein-Leopoldshafen
+Linkenheim-Hochstetten
+Philippsburg
+Waghäusel
+Graben-Neudorf
+Karlsdorf-Neuthard
+Pfinztal
+Weingarten (Baden)
+Walzbachtal
+Remchingen
+Keltern
+Birkenfeld
+Neuenbürg
+Bad Wildbad
+Bad Liebenzell
+Calmbach
+Bad Herrenalb
+Kraichtal
+Östringen
+Bad Schönborn
+St. Leon-Rot
+Nußloch
+Sandhausen
+Eppelheim
+Dossenheim
+Schriesheim
+Ladenburg
+Edingen-Neckarhausen
+Ilvesheim
+Ketsch
+Plankstadt
+Oftersheim
+Neckargemünd
+Eberbach
+Buchen
+Walldürn
+Hardheim
+Adelsheim
+Osterburken
+Tauberbischofsheim
+Lauda-Königshofen
+Boxberg
+Bad Wimpfen
+Gundelsheim
+Obersulm
+Ilsfeld
+Flein
+Leingarten
+Schwaigern
+Untergruppenbach
+Abstatt
+Beilstein
+Mainhardt
+Wüstenrot
+Sulzbach an der Murr
+Aspach
+Allmersbach
+Leutenbach
+Affalterbach
+Benningen
+Pleidelsheim
+Ingersheim
+Sachsenheim
+Oberriexingen
+Eberdingen
+Hemmingen
+Schwieberdingen
+Weissach
+Rutesheim
+Friolzheim
+Wimsheim
+Mönsheim
+Tiefenbronn
+Wurmberg
+Niefern-Öschelbronn
+Kämpfelbach
+Königsbach-Stein
+Ispringen
+Straubenhardt
+Aidlingen
+Gärtringen
+Nufringen
+Bondorf
+Mötzingen
+Jettingen
+Hildrizhausen
+Weil im Schönbuch
+Steinenbronn
+Schönaich
+Magstadt
+Maichingen
+Lenningen
+Weilheim an der Teck
+Dettingen unter Teck
+Notzingen
+Wernau (Neckar)
+Köngen
+Unterensingen
+Oberboihingen
+Wolfschlugen
+Aichtal
+Neckartenzlingen
+Pliezhausen
+Wannweil
+Kusterdingen
+Ammerbuch
+Gomaringen
+Dußlingen
+Nehren
+Ofterdingen
+Bodelshausen
+Rangendingen
+Haigerloch
+Sulz am Neckar
+Dornstetten
+Baiersbronn
+Alpirsbach
+Dunningen
+Zimmern ob Rottweil
+Deißlingen
+Bad Dürrheim
+Brigachtal
+Blumberg
+Hüfingen
+Bräunlingen
+Furtwangen
+Vöhrenbach
+St. Georgen
+Königsfeld
+Niedereschach
+Mönchweiler
+Unterkirnach
+Rietheim-Weilheim
+Wurmlingen
+Mühlheim an der Donau
+Fridingen
+Gosheim
+Wehingen
+Aldingen
+Denkingen
+Frittlingen
+Geisingen
+Immendingen
+Neuhausen ob Eck
+Emmingen-Liptingen
+Schwanau
+Sulzburg
+Rheinfelden (Baden)
+Waldshut-Tiengen
+Lauchringen
+Jestetten
+Klettgau
+Dettingen/Erms
+Bad Wurzach
+Isny im Allgäu
+Kißlegg
+Baienfurt
+Baindt
+Meckenbeuren
+Eriskirch
+Langenargen
+Kressbronn
+Uhldingen-Mühlhofen
+Frickingen
+Pfullendorf
+Ostrach
+Mengen
+Herbertingen
+Ertingen
+Uttenweiler
+Ochsenhausen
+Schwendi
+Dettingen an der Iller
+Erolzheim
+Merklingen
+Laichingen
+Westerstetten
+Amstetten
+Geislingen an der Steige
+Süßen
+Donzdorf
+Eislingen/Fils
+Uhingen
+Ebersbach an der Fils
+Wäschenbeuren
+Rechberghausen
+Adelberg
+Bad Boll
+Bad Ditzenbach
+Wiesensteig
+Singen
+Owen

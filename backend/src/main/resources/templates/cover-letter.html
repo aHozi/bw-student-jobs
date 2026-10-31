@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${de} ? 'de' : 'en'">
+<head>
+<meta charset="UTF-8"/>
+<style>
+  @page { size: A4; margin: 25mm 20mm 20mm 25mm; }
+  body { font-family: 'Body', Helvetica, Arial, sans-serif; font-size: 11pt; color: #1f2933; line-height: 1.45; }
+  .sender { text-align: right; font-size: 9.5pt; color: #334e68; margin-bottom: 18mm; }
+  .recipient { margin-bottom: 10mm; }
+  .date { text-align: right; margin-bottom: 8mm; }
+  .subject { font-weight: bold; margin-bottom: 6mm; }
+  p { margin: 0 0 4mm 0; text-align: justify; }
+  .closing { margin-top: 6mm; }
+  .signature { margin-top: 12mm; }
+</style>
+</head>
+<body>
+  <div class="sender">
+    <div th:text="${name}">Name</div>
+    <div th:if="${street}" th:text="${street}">Street</div>
+    <div th:if="${postalCity}" th:text="${postalCity}">PLZ Ort</div>
+    <div th:if="${email}" th:text="${email}">mail</div>
+    <div th:if="${phone}" th:text="${phone}">phone</div>
+  </div>
+  <div class="recipient">
+    <div th:text="${company}">Company</div>
+    <div th:if="${companyCity}" th:text="${companyCity}">City</div>
+  </div>
+  <div class="date" th:text="${dateLine}">Stuttgart, 01.01.2026</div>
+  <div class="subject" th:text="${letter.subject}">Subject</div>
+  <p th:text="${letter.salutation}">Salutation</p>
+  <p th:each="para : ${letter.paragraphs}" th:text="${para}">Paragraph</p>
+  <div class="closing" th:text="${letter.closing}">Mit freundlichen Grüßen</div>
+  <div class="signature" th:text="${name}">Name</div>
+</body>
+</html>
