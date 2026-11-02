@@ -49,12 +49,7 @@ public class CompanyController {
     @GetMapping("/companies/{id}")
     public CompanyDetail get(@PathVariable long id) {
         Company c = companies.findById(id).orElseThrow(() -> ApiException.notFound("Company"));
-        List<de.bwjobs.job.JobPosting> open = jobs.openByCompany(id).stream()
-                .map(j -> new de.bwjobs.job.JobPosting(j.id(), j.companyId(), j.externalId(), j.url(), j.applyUrl(), j.title(),
-                        null, null, j.locations(), j.remote(), j.inBw(), j.studentTypes(), j.itFields(), j.techTerms(),
-                        j.germanLevel(), j.englishLevel(), j.postingLanguage(), j.languageSource(), j.contactEmail(),
-                        j.postedAt(), j.firstSeenAt(), j.lastSeenAt(), j.status(), j.fingerprint()))
-                .toList();
+        List<de.bwjobs.job.JobPosting> open = jobs.openByCompany(id).stream().map(de.bwjobs.job.JobPosting::withoutDescription).toList();
         return new CompanyDetail(c, open, runLogs.recent(10, id));
     }
 

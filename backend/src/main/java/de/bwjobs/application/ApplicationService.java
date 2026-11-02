@@ -31,7 +31,8 @@ public class ApplicationService {
     public record CreateRequest(long jobId, Long cvDocumentId, Long coverLetterId, List<Long> extraDocumentIds, boolean confirmSimilar) {}
 
     public Application create(long userId, CreateRequest req) {
-        JobPosting job = jobs.findById(req.jobId()).orElseThrow(() -> ApiException.notFound("Job"));
+        JobPosting job = jobs.findById(req.jobId()).filter(j -> jobs.isVisible(userId, j.id()))
+                .orElseThrow(() -> ApiException.notFound("Job"));
         duplicates.check(userId, job, req.confirmSimilar());
         Docs d = validateDocs(userId, req.cvDocumentId(), req.coverLetterId(), req.extraDocumentIds());
         try {

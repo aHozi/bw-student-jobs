@@ -29,9 +29,11 @@ public class FormFillService {
     private static final Pattern COOKIE_ACCEPT = Pattern.compile("(?i)^(?:alle akzeptieren|akzeptieren|accept all|accept|zustimmen|einverstanden|ok|verstanden)$");
 
     private final BrowserService browser;
+    private final de.bwjobs.company.AggregatorGuard boards;
 
-    public FormFillService(BrowserService browser) {
+    public FormFillService(BrowserService browser, de.bwjobs.company.AggregatorGuard boards) {
         this.browser = browser;
+        this.boards = boards;
     }
 
     public record Result(FillReport report, byte[] screenshot, boolean submitted, boolean confirmed, String error) {}
@@ -49,10 +51,12 @@ public class FormFillService {
             page.navigate(url, new Page.NavigateOptions().setWaitUntil(WaitUntilState.DOMCONTENTLOADED).setTimeout(45_000));
             settle(page);
             dismissCookies(page);
+            if (boardStop(page) != null) return boardStop(page);
             if (countFormFields(page) < 2) {
                 openApplicationForm(page);
                 dismissCookies(page);
             }
+            if (boardStop(page) != null) return boardStop(page);
             boolean captcha = page.locator("iframe[src*='recaptcha'], iframe[src*='hcaptcha'], iframe[src*='turnstile'], .g-recaptcha, .h-captcha, [data-sitekey]").count() > 0;
             boolean login = page.locator("input[type=password]:visible").count() > 0;
 
@@ -107,6 +111,14 @@ public class FormFillService {
             return new Result(FillReport.manual(url, "Browser automation failed: " + firstLine(e.getMessage())), shot, false, false,
                     firstLine(e.getMessage()));
         }
+    }
+
+    /** A redirect or "apply" button may lead to a job board; stop there without touching its forms. */
+    private Result boardStop(Page page) {
+        String board = boards.platformName(page.url());
+        if (board == null) return null;
+        String msg = "The application continues on " + board + ". Please apply there yourself.";
+        return new Result(FillReport.manual(page.url(), msg), null, false, false, msg);
     }
 
     private FillReport.Field fillOne(Page page, Map<String, Object> f, int fileInputs, FieldMapper.Material m,

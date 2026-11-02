@@ -120,8 +120,8 @@ class ApplicationFlowIT extends IntegrationTestBase {
 
             // A repost with a near-identical title at the same company needs confirmation
             long repost = jobs.upsert(new JobRepository.Upsert(c.id(), "2", site.base() + "/jobs/2", null, "Werkstudent Java (w/m/d)",
-                    null, "", List.of("Stuttgart (Vaihingen)"), false, true, List.of("WERKSTUDENT"), List.of("JAVA"), List.of(),
-                    "B2", "GOOD", "DE", null, null, JobFingerprint.of(c.id(), "Werkstudent Java", List.of("Stuttgart (Vaihingen)")))).id();
+                    null, "", List.of("Ludwigsburg"), false, true, List.of("WERKSTUDENT"), List.of("JAVA"), List.of(),
+                    "B2", "GOOD", "DE", null, null, JobFingerprint.of(c.id(), "Werkstudent Java", List.of("Ludwigsburg")))).id();
             MvcResult similar = postJson(token, "/api/applications", "{\"jobId\":" + repost + ",\"cvDocumentId\":" + cvId + "}");
             assertThat(similar.getResponse().getStatus()).isEqualTo(409);
             JsonNode details = Sql.JSON.readTree(similar.getResponse().getContentAsString()).get("details");

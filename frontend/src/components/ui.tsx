@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { label } from '../api';
+import { label, platformName } from '../api';
 
 export function Score({ value, ai }: { value: number; ai?: boolean }) {
   const cls = value >= 70 ? 'hi' : value >= 45 ? 'mid' : 'lo';
@@ -44,4 +44,10 @@ export function Section({ title, children, actions }: { title: string; children:
       {children}
     </section>
   );
+}
+
+export function PlatformBadges({ platforms }: { platforms: string[] }) {
+  return <>{platforms.filter(p => p !== 'COMPANY' || platforms.length === 1).map(p => (
+    <span key={p} className={`badge platform-${p}`} title="Where this job was found">{platformName(p)}</span>
+  ))}</>;
 }

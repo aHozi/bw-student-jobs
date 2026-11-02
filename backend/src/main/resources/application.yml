@@ -43,11 +43,11 @@ app:
 
   # Company seed list
   seed:
-    enabled: ${APP_SEED_ENABLED:true}
+    enabled: ${APP_SEED_ENABLED:false}
 
-  # Career page scanning
+  # Career page scanning (off by default: jobs now come from app.sources below)
   scan:
-    enabled: ${APP_SCAN_ENABLED:true}
+    enabled: ${APP_SCAN_ENABLED:false}
     workers: ${APP_SCAN_WORKERS:4}
     default-interval-hours: 12
     min-interval-hours: 6
@@ -70,3 +70,30 @@ app:
     model: ${CLAUDE_MODEL:claude-opus-5-5}
     daily-limit-per-user: ${APP_AI_DAILY_LIMIT:60}
     language-fallback: ${APP_AI_LANGUAGE_FALLBACK:false}
+
+  # Job sources
+  sources:
+    # Bundesagentur fuer Arbeit Jobsuche API (public, free): https://jobsuche.api.bund.dev
+    arbeitsagentur:
+      enabled: ${APP_SOURCE_BA_ENABLED:true}
+      base-url: https://rest.arbeitsagentur.de/jobboerse/jobsuche-service
+      api-key: jobboerse-jobsuche
+      terms: Werkstudent Informatik,Werkstudent Softwareentwicklung,Werkstudent Data Science,Werkstudent IT,Praktikum Informatik,Praktikum Softwareentwicklung,Abschlussarbeit Informatik,Masterarbeit Informatik,Bachelorarbeit Informatik
+      places: Stuttgart,Karlsruhe,Mannheim,Freiburg im Breisgau,Ulm,Heilbronn,Reutlingen,Konstanz
+      radius-km: 30
+      published-within-days: 60
+      max-details-per-run: 400
+    # Adzuna API (free key at https://developer.adzuna.com); off while no key is set
+    adzuna:
+      app-id: ${ADZUNA_APP_ID:}
+      app-key: ${ADZUNA_APP_KEY:}
+      base-url: https://api.adzuna.com/v1/api/jobs/de/search
+      terms: werkstudent informatik,werkstudent software,werkstudent data,praktikum informatik,praktikum software,abschlussarbeit informatik,working student software
+      where: Baden-Württemberg
+      max-days-old: 30
+      max-pages-per-term: 2
+    # Job-alert e-mails from LinkedIn, StepStone and Indeed, read from each user's own inbox (IMAP)
+    email:
+      enabled: ${APP_SOURCE_EMAIL_ENABLED:true}
+      poll-minutes: 30
+      first-sync-days: 30

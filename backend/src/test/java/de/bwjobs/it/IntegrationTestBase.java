@@ -27,7 +27,7 @@ abstract class IntegrationTestBase {
 
     @BeforeEach
     void cleanDatabase() {
-        jdbc.sql("truncate table ai_usage, scan_run_log, scan_task, application, match_score, document, user_profile, app_user, job_posting, company restart identity cascade").update();
+        jdbc.sql("truncate table email_import_seen, email_import_settings, source_run_log, job_visibility, ai_usage, scan_run_log, scan_task, application, match_score, document, user_profile, app_user, job_posting, company restart identity cascade").update();
     }
 
     protected String register(String email) throws Exception {

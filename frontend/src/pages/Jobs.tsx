@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api, date, JobSummary, label, Preferences, Profile, qs } from '../api';
-import { Chips, ErrorBox, LanguageBadges, MultiCheck, Score } from '../components/ui';
+import { Chips, ErrorBox, LanguageBadges, MultiCheck, PlatformBadges, Score } from '../components/ui';
 
-type Meta = { studentTypes: string[]; itFields: string[]; germanLevels: string[]; englishLevels: string[]; locationModes: string[] };
+type Meta = { sources: string[]; studentTypes: string[]; itFields: string[]; germanLevels: string[]; englishLevels: string[]; locationModes: string[] };
 
 type Filters = {
-  q: string; studentTypes: string[]; itFields: string[]; germanLevels: string[]; englishLevels: string[];
+  q: string; sources: string[]; studentTypes: string[]; itFields: string[]; germanLevels: string[]; englishLevels: string[];
   includeUnknownLanguage: boolean; locationMode: string; city: string; postedWithinDays: string; minScore: number;
   hideApplied: boolean; sort: string;
 };
 
 const fromPrefs = (p: Preferences): Filters => ({
-  q: '', studentTypes: p.studentTypes, itFields: p.itFields, germanLevels: p.acceptedGermanLevels,
+  q: '', sources: [], studentTypes: p.studentTypes, itFields: p.itFields, germanLevels: p.acceptedGermanLevels,
   englishLevels: p.acceptedEnglishLevels, includeUnknownLanguage: p.includeUnknownLanguage, locationMode: p.locationMode,
   city: '', postedWithinDays: '', minScore: p.minScore, hideApplied: false, sort: 'match',
 });
@@ -61,6 +61,8 @@ export default function Jobs() {
         <aside className="card stack">
           <label className="field"><span>Search</span>
             <input placeholder="Title, company, keyword" value={f.q} onChange={e => set({ q: e.target.value })} /></label>
+          <div><h3>Source</h3><p className="muted small">None selected = all sources</p>
+            <MultiCheck options={meta.sources} value={f.sources} onChange={v => set({ sources: v })} /></div>
           <div><h3>Job type</h3><MultiCheck options={meta.studentTypes} value={f.studentTypes} onChange={v => set({ studentTypes: v })} /></div>
           <div><h3>Field</h3><p className="muted small">None selected = all IT fields</p>
             <MultiCheck options={meta.itFields} value={f.itFields} onChange={v => set({ itFields: v })} /></div>
@@ -113,6 +115,7 @@ export default function Jobs() {
                   {j.remote && ' · Remote possible'} · seen {date(j.postedAt ?? j.firstSeenAt)}
                 </div>
                 <div className="row small" style={{ marginTop: '.35rem' }}>
+                  <PlatformBadges platforms={j.platforms} />
                   <Chips values={j.studentTypes} /><Chips values={j.itFields.slice(0, 3)} />
                   <LanguageBadges german={j.germanLevel} english={j.englishLevel} />
                   {j.applicationStatus && <span className={`badge status-${j.applicationStatus}`}>{label(j.applicationStatus)}</span>}
@@ -121,7 +124,7 @@ export default function Jobs() {
             </div>
           ))}
           {!items.length && !error && (
-            <div className="card muted">No jobs match these filters yet. New jobs appear as company career pages are scanned.</div>
+            <div className="card muted">No jobs match these filters yet. Connect your LinkedIn/StepStone/Indeed job alerts in <Link to="/settings">Settings</Link>; jobs from the Bundesagentur für Arbeit are imported automatically every few hours.</div>
           )}
           {total > 25 && (
             <div className="row">

@@ -128,7 +128,7 @@ public class CompanyRepository {
     public List<Company> findDueForScan(Instant now, int limit) {
         return jdbc.sql("""
                 select c.* from company c
-                where c.status in ('ACTIVE','NEEDS_REVIEW','BROKEN') and c.next_scan_at <= ?
+                where c.scan_enabled and c.status in ('ACTIVE','NEEDS_REVIEW','BROKEN') and c.next_scan_at <= ?
                   and not exists (select 1 from scan_task t where t.company_id = c.id and t.status in ('PENDING','RUNNING'))
                 order by c.next_scan_at limit ?""")
                 .params(Sql.ts(now), limit).query(MAPPER).list();
@@ -136,6 +136,31 @@ public class CompanyRepository {
 
     public List<Company> findByStatus(String status) {
         return jdbc.sql("select * from company where status = ? order by name").param(status).query(MAPPER).list();
+    }
+
+    public Optional<Company> findByNameKey(String key) {
+        return jdbc.sql("select * from company where name_key = ?").param(key).query(MAPPER).optional();
+    }
+
+    /** Company created automatically from an external job (not scanned, no career page needed). */
+    public Company insertAuto(String name, String nameKey, String city) {
+        long id = jdbc.sql("""
+                insert into company(name, name_key, hq_city, status, source, scan_enabled) values (?,?,?,'ACTIVE','AUTO',false)
+                returning id""").params(name, nameKey, city).query(Long.class).single();
+        return findById(id).orElseThrow();
+    }
+
+    public List<Map.Entry<Long, String>> withoutNameKey() {
+        return jdbc.sql("select id, name from company where name_key is null")
+                .query((rs, i) -> Map.entry(rs.getLong("id"), rs.getString("name"))).list();
+    }
+
+    /** Sets the key unless another company already owns it (then the row keeps a null key). */
+    public void setNameKey(long id, String key) {
+        jdbc.sql("""
+                update company set name_key = ? where id = ?
+                  and not exists (select 1 from company o where o.name_key = ? and o.id <> ?)""")
+                .params(key, id, key, id).update();
     }
 
     public void delete(long id) {

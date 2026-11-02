@@ -30,6 +30,7 @@ export type JobSummary = {
   inBw?: boolean; remote: boolean; studentTypes: string[]; itFields: string[]; germanLevel: string; englishLevel: string;
   postingLanguage?: string; postedAt?: string; firstSeenAt: string; url: string; keywordScore: number; aiScore?: number;
   score: number; languageFit: string; applicationStatus?: string; applicationId?: number;
+  sources: string[]; platforms: string[]; applyIsBoard: boolean; snippetOnly: boolean;
 };
 
 export type Company = {
@@ -43,6 +44,7 @@ export type JobPosting = {
   descriptionText?: string; locations: string[]; remote: boolean; inBw?: boolean; studentTypes: string[];
   itFields: string[]; techTerms: string[]; germanLevel: string; englishLevel: string; postingLanguage?: string;
   languageSource: string; contactEmail?: string; postedAt?: string; firstSeenAt: string; lastSeenAt: string; status: string;
+  sources: string[]; platforms: string[]; applyIsBoard: boolean; snippetOnly: boolean;
 };
 
 export type KeywordScore = { total: number; matchedSkills: string[]; missingSkills: string[]; languageFit: string };
@@ -155,9 +157,23 @@ export const labels: Record<string, string> = {
   DRAFT: 'Draft', PREPARING: 'Filling form…', READY_FOR_REVIEW: 'Ready for your review', MANUAL_REQUIRED: 'Apply manually',
   APPROVED: 'Approved', SUBMITTING: 'Submitting…', SUBMITTED: 'Submitted', FAILED: 'Failed', INTERVIEW: 'Interview',
   OFFER: 'Offer', REJECTED: 'Rejected', WITHDRAWN: 'Withdrawn',
+  EMAIL_ALERT: 'My job alerts (LinkedIn, StepStone, Indeed)', ARBEITSAGENTUR: 'Bundesagentur für Arbeit', ADZUNA: 'Adzuna',
+  CAREER_PAGE: 'Company career pages', LINKEDIN: 'LinkedIn', STEPSTONE: 'StepStone', INDEED: 'Indeed', COMPANY: 'Company site',
   CV: 'CV', COVER_LETTER: 'Cover letter', TRANSCRIPT: 'Transcript', CERTIFICATE: 'Certificate', OTHER: 'Other',
 };
 
 export const label = (k?: string) => (k ? labels[k] ?? k : '');
+
+const PLATFORM_SHORT: Record<string, string> = {
+  LINKEDIN: 'LinkedIn', STEPSTONE: 'StepStone', INDEED: 'Indeed', ARBEITSAGENTUR: 'Arbeitsagentur', ADZUNA: 'Adzuna', COMPANY: 'Company site',
+};
+export const platformName = (p: string) => PLATFORM_SHORT[p] ?? p;
+
+/** Where the user applies for a job: the job board's name, or null for a company site (auto-fill possible). */
+export function applyPlatform(job: { applyIsBoard: boolean; platforms: string[] }): string | null {
+  if (!job.applyIsBoard) return null;
+  const p = job.platforms.find(x => x !== 'COMPANY');
+  return p ? platformName(p) : 'the job board';
+}
 
 export const date = (s?: string) => (s ? new Date(s).toLocaleDateString('de-DE') : '');

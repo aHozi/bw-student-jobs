@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { AiMatch, api, Application, ApiError, date, Doc, JobDetail, label, Profile } from '../api';
-import { Chips, ErrorBox, LanguageBadges, Score, Section } from '../components/ui';
+import { AiMatch, api, Application, ApiError, applyPlatform, date, Doc, JobDetail, label, Profile } from '../api';
+import { Chips, ErrorBox, LanguageBadges, PlatformBadges, Score, Section } from '../components/ui';
 import DocEditor from '../components/DocEditor';
 
 export default function JobDetailPage() {
@@ -37,6 +37,7 @@ export default function JobDetailPage() {
   const letters = docs.filter(x => x.kind === 'COVER_LETTER' && (x.original || x.jobId === job.id));
   const others = docs.filter(x => !['CV', 'COVER_LETTER'].includes(x.kind));
   const noConsent = !profile.aiConsent;
+  const board = applyPlatform(job);
 
   const run = async (name: string, fn: () => Promise<void>) => {
     setBusy(name); setError('');
@@ -80,9 +81,10 @@ export default function JobDetailPage() {
             <h1 style={{ marginBottom: '.25rem' }}>{job.title}</h1>
             <div className="muted"><Link to={`/companies/${company.id}`}>{company.name}</Link> · {job.locations.join('; ') || company.hqCity}{job.remote && ' · Remote possible'}</div>
           </div>
-          <a className="btn" href={job.url} target="_blank" rel="noreferrer">Open on company career page ↗</a>
+          <a className="btn" href={job.applyUrl ?? job.url} target="_blank" rel="noreferrer">{board ? `Open on ${board} ↗` : 'Open original posting ↗'}</a>
         </div>
-        <div className="row"><Chips values={job.studentTypes} /><Chips values={job.itFields} /></div>
+        <div className="row"><PlatformBadges platforms={job.platforms} /><Chips values={job.studentTypes} /><Chips values={job.itFields} /></div>
+        {job.snippetOnly && <div className="notice small">Only a short summary of this job is known (from {job.sources.includes('EMAIL_ALERT') ? 'your job-alert e-mail' : 'the job search API'}). Open the original posting for the full description and language requirements.</div>}
         <div className="row"><LanguageBadges german={job.germanLevel} english={job.englishLevel} />
           <span className="muted small">Posting in {job.postingLanguage === 'EN' ? 'English' : 'German'} · first seen {date(job.firstSeenAt)}{job.languageSource === 'AI' && ' · language checked by AI'}</span></div>
         {d.application && <div className="notice">You already have an application for this job: <Link to={`/applications/${d.application.id}`}>{label(d.application.status)}</Link></div>}
@@ -94,14 +96,14 @@ export default function JobDetailPage() {
           <Section title="Job description">
             {job.descriptionHtml
               ? <div className="description" dangerouslySetInnerHTML={{ __html: job.descriptionHtml }} />
-              : <p className="muted">No description could be read. Open the career page for details.</p>}
+              : <p className="muted">No description available. Open the original posting for details.</p>}
           </Section>
           <Section title="Company">
             <div className="small">
               <div><b>{company.name}</b> · {company.industry} · {company.hqCity}</div>
               {company.website && <div><a href={company.website} target="_blank" rel="noreferrer">{company.website}</a></div>}
               {company.careerUrl && <div>Career page: <a href={company.careerUrl} target="_blank" rel="noreferrer">{company.careerUrl}</a></div>}
-              <div className="muted">Career system: {company.atsType}</div>
+              {company.atsType !== 'UNKNOWN' && <div className="muted">Career system: {company.atsType}</div>}
             </div>
           </Section>
         </div>
@@ -177,9 +179,11 @@ export default function JobDetailPage() {
                   </div>
                 )}
                 <button className="primary" disabled={!!busy || !!d.application || !cvId} onClick={() => apply()}>
-                  {busy === 'apply' ? 'Starting…' : 'Prepare application'}
+                  {busy === 'apply' ? 'Starting…' : board ? 'Prepare & track application' : 'Prepare application'}
                 </button>
-                <p className="muted small">We fill the company's form for you and show you everything first. Nothing is sent until you approve it.</p>
+                <p className="muted small">{board
+                  ? `You apply on ${board} yourself (automating job boards is against their terms). The app keeps your documents ready and tracks the application.`
+                  : "We fill the company's form for you and show you everything first. Nothing is sent until you approve it."}</p>
               </div>
             )}
             <ErrorBox error={error} />

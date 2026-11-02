@@ -34,6 +34,7 @@ public class JobController {
 
     @GetMapping("/jobs")
     public JobSearchService.Result list(@RequestParam(required = false) String q,
+                                        @RequestParam(required = false) String sources,
                                         @RequestParam(required = false) String studentTypes,
                                         @RequestParam(required = false) String itFields,
                                         @RequestParam(required = false) String germanLevels,
@@ -48,7 +49,7 @@ public class JobController {
                                         @RequestParam(defaultValue = "match") String sort,
                                         @RequestParam(defaultValue = "0") int page,
                                         @RequestParam(defaultValue = "25") int size) {
-        return search.search(CurrentUser.id(), new JobQuery(q, csv(studentTypes), csv(itFields), csv(germanLevels),
+        return search.search(CurrentUser.id(), new JobQuery(q, csv(sources), csv(studentTypes), csv(itFields), csv(germanLevels),
                 csv(englishLevels), includeUnknownLanguage, locationMode, city, postedWithinDays, minScore, companyId,
                 hideApplied, sort, page, size));
     }
@@ -63,7 +64,7 @@ public class JobController {
     @GetMapping("/jobs/{id}")
     public JobDetail get(@PathVariable long id) {
         long uid = CurrentUser.id();
-        JobPosting j = jobs.findById(id).orElseThrow(() -> ApiException.notFound("Job"));
+        JobPosting j = jobs.findById(id).filter(x -> jobs.isVisible(uid, x.id())).orElseThrow(() -> ApiException.notFound("Job"));
         Company c = companies.findById(j.companyId()).orElseThrow();
         UserProfile p = profiles.get(uid);
         var score = KeywordMatcher.score(KeywordMatcher.userTerms(p, search.latestCvText(uid)), p, j.techTerms(),
@@ -89,7 +90,8 @@ public class JobController {
                 "itFields", List.copyOf(ItFieldTaxonomy.FIELDS.keySet()),
                 "germanLevels", Arrays.stream(GermanLevel.values()).map(Enum::name).toList(),
                 "englishLevels", Arrays.stream(EnglishLevel.values()).map(Enum::name).toList(),
-                "locationModes", List.of("BW_ONLY", "BW_OR_REMOTE", "ALL"));
+                "locationModes", List.of("BW_ONLY", "BW_OR_REMOTE", "ALL"),
+                "sources", List.of("EMAIL_ALERT", "ARBEITSAGENTUR", "ADZUNA", "CAREER_PAGE"));
     }
 
     private static List<String> csv(String s) {

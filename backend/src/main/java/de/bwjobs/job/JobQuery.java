@@ -4,6 +4,7 @@ import java.util.List;
 
 public record JobQuery(
         String q,
+        List<String> sources,      // EMAIL_ALERT / ARBEITSAGENTUR / ADZUNA / CAREER_PAGE (empty = all)
         List<String> studentTypes,
         List<String> itFields,
         List<String> germanLevels,

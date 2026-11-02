@@ -54,3 +54,11 @@ table { width: 100%; border-collapse: collapse; } th, td { text-align: left; pad
 .status-SUBMITTED, .status-INTERVIEW, .status-OFFER { color: var(--ok); }
 .status-FAILED, .status-REJECTED { color: var(--bad); }
 .status-READY_FOR_REVIEW, .status-MANUAL_REQUIRED { color: var(--warn); }
+.platform-LINKEDIN { color: #0a66c2; border-color: #0a66c2; }
+.platform-STEPSTONE { color: #0c2577; border-color: #0c2577; }
+.platform-INDEED { color: #2557a7; border-color: #2557a7; }
+.platform-ARBEITSAGENTUR { color: #c3002d; border-color: #c3002d; }
+.platform-ADZUNA { color: #2a9d8f; border-color: #2a9d8f; }
+@media (prefers-color-scheme: dark) {
+  .platform-LINKEDIN, .platform-STEPSTONE, .platform-INDEED, .platform-ARBEITSAGENTUR, .platform-ADZUNA { color: var(--text); }
+}

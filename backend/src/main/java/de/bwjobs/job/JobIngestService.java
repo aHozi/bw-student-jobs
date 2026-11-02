@@ -42,8 +42,7 @@ public class JobIngestService {
         for (RawJob r : raw) {
             if (r.title() == null || r.url() == null) continue;
             if (guard.isAggregator(r.url()) || (r.applyUrl() != null && guard.isAggregator(r.applyUrl()))) continue;
-            Set<StudentType> types = StudentTypeRules.detect(r.title());
-            if (types.isEmpty()) continue;
+            if (StudentTypeRules.detect(r.title()).isEmpty()) continue;
             studentLike++;
 
             RawJob job = r;
@@ -55,20 +54,15 @@ public class JobIngestService {
                     log.debug("Details failed for {}: {}", r.url(), e.getMessage());
                 }
             }
-            String text = HtmlText.toText(job.descriptionHtml());
-            ItFieldTaxonomy.Result it = ItFieldTaxonomy.classify(job.title(), text);
-            if (!it.isIt()) continue;
-
-            LanguageRequirementExtractor.Result lang = LanguageRequirementExtractor.extract(job.title(), text);
-            BwLocationMatcher.Result loc = BwLocationMatcher.match(job.locations(), text);
-            String fp = JobFingerprint.of(company.id(), job.title(), job.locations());
-            if (!seenFingerprints.add(fp)) continue;
+            JobClassifier.Classified c = JobClassifier.classify(company.id(), job.title(), job.descriptionHtml(), job.locations());
+            if (c == null) continue;
+            if (!seenFingerprints.add(c.fingerprint())) continue;
 
             JobRepository.UpsertResult res = jobs.upsert(new JobRepository.Upsert(
                     company.id(), Text.truncate(job.externalId(), 500), job.url(), job.applyUrl(), Text.truncate(job.title(), 300),
-                    HtmlText.safeHtml(job.descriptionHtml(), job.url()), text, job.locations(), job.remote() || loc.remote(), loc.inBw(),
-                    types.stream().map(Enum::name).sorted().toList(), new ArrayList<>(it.fields()), new ArrayList<>(it.techTerms()),
-                    lang.german().name(), lang.english().name(), lang.postingLanguage(), contactEmail(text), job.postedAt(), fp));
+                    HtmlText.safeHtml(job.descriptionHtml(), job.url()), c.text(), job.locations(), job.remote() || c.loc().remote(),
+                    c.loc().inBw(), c.typeNames(), c.fieldNames(), c.techTermList(), c.lang().german().name(),
+                    c.lang().english().name(), c.lang().postingLanguage(), contactEmail(c.text()), job.postedAt(), c.fingerprint()));
             accepted++;
             if (res.inserted()) created++;
         }
@@ -77,7 +71,7 @@ public class JobIngestService {
     }
 
     /** Application e-mail address mentioned in the posting, if any (for e-mail applications). */
-    static String contactEmail(String text) {
+    public static String contactEmail(String text) {
         if (text == null) return null;
         Matcher m = EMAIL.matcher(text);
         String fallback = null;

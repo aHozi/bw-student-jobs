@@ -32,6 +32,19 @@ public class AggregatorGuard {
         return false;
     }
 
+    /** Display name of the job board a URL belongs to, or null if it is not a job board. */
+    public String platformName(String url) {
+        if (!isAggregator(url)) return null;
+        String h = host(url);
+        if (h.contains("linkedin")) return "LinkedIn";
+        if (h.contains("stepstone")) return "StepStone";
+        if (h.contains("indeed")) return "Indeed";
+        if (h.contains("arbeitsagentur")) return "Bundesagentur für Arbeit";
+        if (h.contains("adzuna")) return "Adzuna";
+        if (h.contains("xing")) return "XING";
+        return "the job board";
+    }
+
     public void requireOfficial(String url) {
         if (isAggregator(url)) {
             throw new IllegalArgumentException("Job aggregators are not allowed as sources: " + url);

@@ -26,7 +26,7 @@ export default function Login() {
   return (
     <div className="auth card stack">
       <h1>BW Student Jobs</h1>
-      <p className="muted">Werkstudent, internship and thesis jobs in IT — straight from the official career pages of companies in Baden-Württemberg.</p>
+      <p className="muted">Werkstudent, internship and thesis jobs in IT in Baden-Württemberg — from your LinkedIn, StepStone and Indeed job alerts and the Bundesagentur für Arbeit, in one place.</p>
       <form className="stack" onSubmit={submit}>
         {mode === 'register' && (
           <label className="field"><span>Name</span><input value={displayName} onChange={e => setDisplayName(e.target.value)} /></label>

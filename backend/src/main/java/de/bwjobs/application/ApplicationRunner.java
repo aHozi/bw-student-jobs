@@ -2,6 +2,7 @@ package de.bwjobs.application;
 
 import de.bwjobs.application.formfill.FieldMapper;
 import de.bwjobs.application.formfill.FormFillService;
+import de.bwjobs.company.AggregatorGuard;
 import de.bwjobs.document.Document;
 import de.bwjobs.document.DocumentService;
 import de.bwjobs.document.DocumentStorage;
@@ -30,9 +31,11 @@ public class ApplicationRunner {
     private final DocumentService documents;
     private final DocumentStorage storage;
     private final FormFillService filler;
+    private final AggregatorGuard boards;
 
     public ApplicationRunner(ApplicationRepository apps, JobRepository jobs, ProfileRepository profiles,
-                             DocumentService documents, DocumentStorage storage, FormFillService filler) {
+                             DocumentService documents, DocumentStorage storage, FormFillService filler, AggregatorGuard boards) {
+        this.boards = boards;
         this.apps = apps;
         this.jobs = jobs;
         this.profiles = profiles;
@@ -54,6 +57,13 @@ public class ApplicationRunner {
     public void prepare(long id) {
         Application a = apps.findById(id).orElseThrow();
         JobPosting job = jobs.findById(a.jobId()).orElseThrow();
+        String board = boards.platformName(job.bestApplyUrl());
+        if (board != null) {
+            // Never automate job-board sites (LinkedIn, StepStone, Indeed, ...): their terms forbid it.
+            String msg = "This job is applied for on " + board + ". Open it, apply there yourself, then mark it as submitted here.";
+            apps.saveFillResult(id, ApplicationStatus.MANUAL_REQUIRED, "MANUAL", FillReport.manual(job.bestApplyUrl(), msg), null, msg);
+            return;
+        }
         try (Material m = material(a)) {
             FormFillService.Result r = filler.prepare(job.bestApplyUrl(), m.fieldMaterial());
             String shotKey = r.screenshot() == null ? null : storage.put(r.screenshot());

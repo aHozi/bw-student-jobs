@@ -14,7 +14,23 @@ public record AppProperties(
         Seed seed,
         Scan scan,
         Browser browser,
-        Ai ai) {
+        Ai ai,
+        Sources sources) {
+
+    /** External job sources that replace career-page scanning (see app.sources in application.yml). */
+    public record Sources(Arbeitsagentur arbeitsagentur, Adzuna adzuna, Email email) {}
+
+    public record Arbeitsagentur(boolean enabled, String baseUrl, String apiKey, List<String> terms, List<String> places,
+                                 int radiusKm, int publishedWithinDays, int maxDetailsPerRun) {}
+
+    public record Adzuna(String appId, String appKey, String baseUrl, List<String> terms, String where,
+                         int maxDaysOld, int maxPagesPerTerm) {
+        public boolean enabled() {
+            return appId != null && !appId.isBlank() && appKey != null && !appKey.isBlank();
+        }
+    }
+
+    public record Email(boolean enabled, int pollMinutes, int firstSyncDays) {}
 
     public record Storage(String dir, String encryptionKey) {}
 

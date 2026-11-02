@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api, auth, Doc, LanguageSkill, Profile } from '../api';
 import { ErrorBox, Section } from '../components/ui';
+import EmailImport from '../components/EmailImport';
 
 const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'NATIVE'];
 
@@ -53,6 +54,7 @@ export default function Settings() {
   return (
     <div className="page grid">
       <h1>Settings</h1>
+      <EmailImport />
       <Section title="AI features">
         <label className="check"><input type="checkbox" checked={p.aiConsent} onChange={e => save({ ...p, aiConsent: e.target.checked })} />
           Allow AI processing: my CV and profile are sent to the Claude API (Anthropic) to compute AI match scores, tailor my CV and write cover letters.</label>

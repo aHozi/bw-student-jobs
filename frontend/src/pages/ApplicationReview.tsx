@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { api, Application, date, Doc, JobDetail, label } from '../api';
+import { api, Application, applyPlatform, date, Doc, JobDetail, label } from '../api';
 import { ErrorBox, Section } from '../components/ui';
 
 export default function ApplicationReview() {
@@ -42,6 +42,7 @@ export default function ApplicationReview() {
 
   if (!a || !job) return <div className="page muted">{error || 'Loading…'}</div>;
   const r = a.fillReport;
+  const board = applyPlatform(job.job);
   const docName = (docId?: number) => docs.find(d => d.id === docId)?.title ?? '—';
   const needs = r?.fields.filter(f => f.status === 'NEEDS_INPUT') ?? [];
   const consentFields = r?.fields.filter(f => f.status === 'CONSENT') ?? [];
@@ -61,7 +62,7 @@ export default function ApplicationReview() {
         <div className="row between">
           <div>
             <h1 style={{ marginBottom: '.25rem' }}>{job.job.title}</h1>
-            <div className="muted">{job.company.name} · <Link to={`/jobs/${job.job.id}`}>job details</Link> · <a href={job.job.url} target="_blank" rel="noreferrer">career page ↗</a></div>
+            <div className="muted">{job.company.name} · <Link to={`/jobs/${job.job.id}`}>job details</Link> · <a href={job.job.applyUrl ?? job.job.url} target="_blank" rel="noreferrer">{board ? `posting on ${board} ↗` : 'original posting ↗'}</a></div>
           </div>
           <div className={`badge status-${a.status}`} style={{ fontSize: '1rem' }}>{label(a.status)}</div>
         </div>
@@ -137,14 +138,14 @@ export default function ApplicationReview() {
             </div>
           ) : (
             <div className="row">
-              <a className="btn primary" href={r?.url ?? job.job.url} target="_blank" rel="noreferrer">Open application page ↗</a>
+              <a className="btn primary" href={r?.url ?? job.job.url} target="_blank" rel="noreferrer">{board ? `Apply on ${board} ↗` : 'Open application page ↗'}</a>
               {[a.cvDocumentId, a.coverLetterId, ...a.extraDocumentIds].filter(Boolean).map(d => (
                 <button key={d} onClick={async () => window.open(await api.blobUrl(`/documents/${d}/download`), '_blank')}>Download {docName(d!)}</button>
               ))}
             </div>
           )}
           <div className="row"><button onClick={() => act(() => api.post(`/applications/${a.id}/mark-submitted`))}>I have applied — mark as submitted</button>
-            <button onClick={() => act(() => api.post(`/applications/${a.id}/prepare`))}>Try automatic filling again</button></div>
+            {!board && <button onClick={() => act(() => api.post(`/applications/${a.id}/prepare`))}>Try automatic filling again</button>}</div>
           <ErrorBox error={error} />
         </Section>
       )}
@@ -152,7 +153,7 @@ export default function ApplicationReview() {
       {a.status === 'FAILED' && (
         <Section title="Submission failed">
           <div className="row"><button onClick={() => act(() => api.post(`/applications/${a.id}/prepare`))}>Fill the form again</button>
-            <a className="btn" href={job.job.url} target="_blank" rel="noreferrer">Apply on career page ↗</a>
+            <a className="btn" href={job.job.applyUrl ?? job.job.url} target="_blank" rel="noreferrer">Apply on the original page ↗</a>
             <button onClick={() => act(() => api.post(`/applications/${a.id}/mark-submitted`))}>I applied myself — mark as submitted</button></div>
           <ErrorBox error={error} />
         </Section>

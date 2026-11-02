@@ -34,15 +34,21 @@ public class JobSearchService {
         StringBuilder sql = new StringBuilder("""
                 select j.id, j.title, j.company_id, c.name as company_name, c.hq_city, j.locations, j.in_bw, j.remote,
                        j.student_types, j.it_fields, j.tech_terms, j.german_level, j.english_level, j.posting_language,
-                       j.posted_at, j.first_seen_at, j.url, m.ai_score, a.status as app_status, a.id as app_id
+                       j.posted_at, j.first_seen_at, j.url, m.ai_score, a.status as app_status, a.id as app_id,
+                       j.sources, j.platforms, j.apply_is_board, j.snippet_only
                 from job_posting j
                 join company c on c.id = j.company_id
                 left join match_score m on m.job_id = j.id and m.user_id = :uid
                 left join application a on a.job_id = j.id and a.user_id = :uid
-                where j.status = 'OPEN'""");
+                where j.status = 'OPEN'
+                  and (j.public_visible or exists (select 1 from job_visibility v where v.job_id = j.id and v.user_id = :uid))""");
         Map<String, Object> p = new HashMap<>();
         p.put("uid", userId);
 
+        if (notEmpty(q.sources())) {
+            sql.append(" and j.sources && cast(:sources as text[])");
+            p.put("sources", Sql.arrayLiteral(q.sources()));
+        }
         if (notEmpty(q.studentTypes())) {
             sql.append(" and j.student_types && cast(:types as text[])");
             p.put("types", Sql.arrayLiteral(q.studentTypes()));
@@ -104,7 +110,8 @@ public class JobSearchService {
                     rs.getString("hq_city"), Sql.textArray(rs, "locations"), Sql.boolOrNull(rs, "in_bw"), rs.getBoolean("remote"),
                     types, fields, german, english, postingLang, Sql.instant(rs, "posted_at"), Sql.instant(rs, "first_seen_at"),
                     rs.getString("url"), s.total(), ai, ai != null ? ai : s.total(), s.languageFit(),
-                    rs.getString("app_status"), Sql.longOrNull(rs, "app_id"));
+                    rs.getString("app_status"), Sql.longOrNull(rs, "app_id"), Sql.textArray(rs, "sources"),
+                    Sql.textArray(rs, "platforms"), rs.getBoolean("apply_is_board"), rs.getBoolean("snippet_only"));
         }).list();
 
         int min = q.minScore() == null ? 0 : q.minScore();
