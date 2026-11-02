@@ -27,14 +27,14 @@ import java.util.stream.Stream;
  */
 @Service
 public class TailoringService {
-    private final ClaudeClient claude;
+    private final AiClient claude;
     private final DocumentService documents;
     private final PdfRenderer pdf;
     private final JobRepository jobs;
     private final CompanyRepository companies;
     private final ProfileRepository profiles;
 
-    public TailoringService(ClaudeClient claude, DocumentService documents, PdfRenderer pdf, JobRepository jobs,
+    public TailoringService(AiClient claude, DocumentService documents, PdfRenderer pdf, JobRepository jobs,
                             CompanyRepository companies, ProfileRepository profiles) {
         this.claude = claude;
         this.documents = documents;

@@ -8,7 +8,7 @@ const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'NATIVE'];
 export default function Settings() {
   const [p, setP] = useState<Profile>();
   const [docs, setDocs] = useState<Doc[]>([]);
-  const [ai, setAi] = useState<{ enabled: boolean; usedToday: number; dailyLimit: number }>();
+  const [ai, setAi] = useState<{ enabled: boolean; provider: string; model: string; usedToday: number; dailyLimit: number }>();
   const [msg, setMsg] = useState('');
   const [error, setError] = useState('');
   const [suggestion, setSuggestion] = useState<any>();
@@ -57,8 +57,8 @@ export default function Settings() {
       <EmailImport />
       <Section title="AI features">
         <label className="check"><input type="checkbox" checked={p.aiConsent} onChange={e => save({ ...p, aiConsent: e.target.checked })} />
-          Allow AI processing: my CV and profile are sent to the Claude API (Anthropic) to compute AI match scores, tailor my CV and write cover letters.</label>
-        {ai && <p className="muted small">{ai.enabled ? `AI is available on this server · used today: ${ai.usedToday}/${ai.dailyLimit}` : 'AI is not configured on this server.'}</p>}
+          Allow AI processing: my CV and profile are sent to this server's AI provider (Google Gemini or Anthropic Claude) to compute AI match scores, tailor my CV and write cover letters.</label>
+        {ai && <p className="muted small">{ai.enabled ? `AI provider: ${ai.provider === 'gemini' ? 'Google Gemini' : 'Anthropic Claude'} (${ai.model}) · used today: ${ai.usedToday}/${ai.dailyLimit}` : 'AI is not configured on this server.'}</p>}
       </Section>
 
       <Section title="Fill profile from my CV">

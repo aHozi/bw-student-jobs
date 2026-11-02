@@ -16,14 +16,14 @@ import org.springframework.stereotype.Service;
 /** On-demand AI match score for one user and one job, cached in match_score. */
 @Service
 public class MatchScorer {
-    private final ClaudeClient claude;
+    private final AiClient claude;
     private final JobRepository jobs;
     private final CompanyRepository companies;
     private final ProfileRepository profiles;
     private final JobSearchService search;
     private final JdbcClient jdbc;
 
-    public MatchScorer(ClaudeClient claude, JobRepository jobs, CompanyRepository companies, ProfileRepository profiles,
+    public MatchScorer(AiClient claude, JobRepository jobs, CompanyRepository companies, ProfileRepository profiles,
                        JobSearchService search, JdbcClient jdbc) {
         this.claude = claude;
         this.jobs = jobs;

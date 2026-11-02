@@ -21,10 +21,10 @@ import java.util.Set;
 public class AlertJobExtractor {
     private static final Logger log = LoggerFactory.getLogger(AlertJobExtractor.class);
 
-    private final ClaudeClient claude;
+    private final AiClient claude;
     private final ProfileRepository profiles;
 
-    public AlertJobExtractor(ClaudeClient claude, ProfileRepository profiles) {
+    public AlertJobExtractor(AiClient claude, ProfileRepository profiles) {
         this.claude = claude;
         this.profiles = profiles;
     }

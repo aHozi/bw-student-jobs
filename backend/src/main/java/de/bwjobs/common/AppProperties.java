@@ -42,7 +42,19 @@ public record AppProperties(
 
     public record Browser(String executablePath, boolean headless) {}
 
-    public record Ai(String apiKey, String baseUrl, String model, int dailyLimitPerUser, boolean languageFallback) {
+    /**
+     * AI provider settings. provider = auto (Claude if ANTHROPIC_API_KEY is set, else Gemini if GEMINI_API_KEY is set),
+     * claude or gemini.
+     */
+    public record Ai(String provider, String apiKey, String baseUrl, String model, int dailyLimitPerUser,
+                     boolean languageFallback, Gemini gemini) {
+        /** Claude is configured. */
+        public boolean enabled() {
+            return apiKey != null && !apiKey.isBlank();
+        }
+    }
+
+    public record Gemini(String apiKey, String model, String baseUrl) {
         public boolean enabled() {
             return apiKey != null && !apiKey.isBlank();
         }

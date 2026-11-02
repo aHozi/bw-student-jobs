@@ -63,13 +63,19 @@ app:
     executable-path: ${APP_BROWSER_PATH:}
     headless: true
 
-  # Claude API
+  # AI (match scores, CV tailoring, cover letters). provider: auto | claude | gemini
+  # auto = Claude if ANTHROPIC_API_KEY is set, otherwise Gemini if GEMINI_API_KEY is set
   ai:
+    provider: ${AI_PROVIDER:auto}
     api-key: ${ANTHROPIC_API_KEY:}
     base-url: ${ANTHROPIC_BASE_URL:}
     model: ${CLAUDE_MODEL:claude-opus-5-5}
     daily-limit-per-user: ${APP_AI_DAILY_LIMIT:60}
     language-fallback: ${APP_AI_LANGUAGE_FALLBACK:false}
+    gemini:
+      api-key: ${GEMINI_API_KEY:}
+      model: ${GEMINI_MODEL:gemini-3.8-flash}
+      base-url: ${GEMINI_BASE_URL:https://generativelanguage.googleapis.com/v1beta}
 
   # Job sources
   sources:

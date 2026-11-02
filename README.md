@@ -27,7 +27,7 @@ The same job seen in several sources (e.g. LinkedIn alert + Bundesagentur) is me
 - **Student + IT only**: titles classified as Werkstudent / Praktikum / Abschlussarbeit (Duales Studium as optional filter); fields like Backend, Java, AI/ML, Data Science, QA/Testing, DevOps, Embedded, Security, SAP.
 - **Flexible language filters**: each posting gets a German level (Not required, Nice to have, B1, B2, Fluent, Native, Not stated) and an English level. **Jobs are never hidden by language** unless the user picks accepted levels. Alert e-mails carry no description, so their level is usually "Not stated".
 - **Filters**: source, job type, field, languages, location (BW only / BW + remote / all), city, date, minimum score.
-- **Match scores**: instant keyword score for every job + optional AI assessment (Claude).
+- **Match scores**: instant keyword score for every job + optional AI assessment (Google Gemini or Anthropic Claude).
 - **Documents**: upload CV, cover letters, transcripts, certificates (encrypted at rest). Per job: use originals, or generate a tailored CV / cover letter (DE or EN), edit it, and re-render the PDF. Originals are never changed.
 - **Applying**: job-board jobs → open the posting, apply there, mark as submitted. Company forms → headless Chromium fills the form, shows every value + a screenshot, and submits **only after your explicit approval**.
 - **Tracking + duplicate protection**: one application per job (DB-enforced), warning for near-identical reposts at the same company, statuses from Draft to Offer, notes and follow-up dates.
@@ -97,7 +97,7 @@ $b = New-Object byte[] 32; [Security.Cryptography.RandomNumberGenerator]::Create
 $b = New-Object byte[] 48; [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($b); Add-Content .env "APP_JWT_SECRET=$([Convert]::ToBase64String($b))"
 ```
 
-3. Optional: open `.env` and fill in `ANTHROPIC_API_KEY=` (AI features) and `ADZUNA_APP_ID` / `ADZUNA_APP_KEY` (free at https://developer.adzuna.com).
+3. Optional: open `.env` and fill in `GEMINI_API_KEY=` (free key at https://aistudio.google.com/apikey) or `ANTHROPIC_API_KEY=` for the AI features and `ADZUNA_APP_ID` / `ADZUNA_APP_KEY` (free at https://developer.adzuna.com).
 4. Start everything (the first build takes about 5–10 minutes):
 
 ```bash
@@ -164,8 +164,11 @@ All settings are environment variables (see `backend/src/main/resources/applicat
 | `APP_SCAN_WORKERS` | `4` | Worker threads per instance |
 | `APP_SCAN_USER_AGENT` | bot name | **Use an honest name with a contact URL/e-mail** |
 | `APP_SCAN_BROWSER` | `true` | Headless-browser fallback for JavaScript career pages |
-| `ANTHROPIC_API_KEY` | – | Enables AI features |
-| `CLAUDE_MODEL` | `claude-opus-5-5` | Model for all AI calls |
+| `AI_PROVIDER` | `auto` | `auto` (Claude if its key is set, else Gemini), `claude` or `gemini` |
+| `GEMINI_API_KEY` | – | Enables AI features with Google Gemini |
+| `GEMINI_MODEL` | `gemini-3.8-flash` | Gemini model id (check Google AI Studio for current ids) |
+| `ANTHROPIC_API_KEY` | – | Enables AI features with Anthropic Claude |
+| `CLAUDE_MODEL` | `claude-opus-5-5` | Claude model id |
 | `APP_AI_DAILY_LIMIT` | `60` | AI calls per user per day |
 | `APP_AI_LANGUAGE_FALLBACK` | `false` | Let Claude classify language requirements the rules could not read |
 
@@ -195,7 +198,12 @@ ATS tenant formats (set automatically by discovery):
 
 ## AI features (optional)
 
-Uses the official Anthropic Java SDK with structured outputs. Server-side refusal fallback is enabled.
+Two providers, chosen with `AI_PROVIDER` (default `auto`):
+
+- **Google Gemini**: REST `generateContent` with JSON output constrained by a `responseSchema` (`ai/GeminiClient.java`).
+- **Anthropic Claude**: official Anthropic Java SDK with structured outputs and server-side refusal fallback (`ai/ClaudeClient.java`).
+
+Both return the same typed results (`ai/AiModels.java`); all features call the `AiClient` interface, and the per-user daily limit applies to both.
 
 - **AI match score**: fit 0–100, strengths, gaps, language assessment, advice.
 - **Tailored CV**: reorders and rephrases only facts from your CV, lists every change for review, rendered as PDF.
@@ -235,7 +243,7 @@ Unit tests run anywhere. Integration tests need PostgreSQL with a `bwjobs_test` 
 cd backend && mvn test
 ```
 
-What is covered: alert e-mail parsing (LinkedIn, StepStone, Indeed — synthetic sample e-mails), real IMAP import against a GreenMail test server (read-only, once per message, private to the user), Bundesagentur + Adzuna imports against mock APIs, merging the same job across sources, source filter and visibility, manual mode for job-board links, classifiers (student type, IT field, language levels, BW location), aggregator blocklist, ATS detection, every adapter against mock API responses, robots.txt, full scan → search → close pipeline, application flow with a real headless browser (no submit before approval, single submit after approval, duplicates), AI endpoints against a mock Claude API (PDF output, consent, quota).
+What is covered: AI features with Claude and with Gemini against mock APIs, alert e-mail parsing (LinkedIn, StepStone, Indeed — synthetic sample e-mails), real IMAP import against a GreenMail test server (read-only, once per message, private to the user), Bundesagentur + Adzuna imports against mock APIs, merging the same job across sources, source filter and visibility, manual mode for job-board links, classifiers (student type, IT field, language levels, BW location), aggregator blocklist, ATS detection, every adapter against mock API responses, robots.txt, full scan → search → close pipeline, application flow with a real headless browser (no submit before approval, single submit after approval, duplicates), AI endpoints against a mock Claude API (PDF output, consent, quota).
 
 ---
 
@@ -251,6 +259,7 @@ What is covered: alert e-mail parsing (LinkedIn, StepStone, Indeed — synthetic
 - Alert e-mail layouts change. The parser recognises job links by URL pattern and was tested with synthetic sample e-mails, not real ones. If an alert yields no jobs, enable AI processing (fallback extraction) and please add a real e-mail as a test fixture (`backend/src/test/resources/fixtures/alerts/`).
 - Alert jobs have no full description (the job pages are not fetched), so language levels and skill matching are weaker for them; open the posting for details.
 - Microsoft 365 / Outlook.com mailboxes no longer accept IMAP passwords. Forward the alerts to a Gmail/GMX/web.de address.
+- The Gemini client follows the documented REST format and was tested against a mock; Google's docs could not be fetched from the build environment, so check the default model id (`GEMINI_MODEL`) in Google AI Studio. The prompts were written for Claude: compare a few results when you use Gemini.
 - The Bundesagentur client follows the published OpenAPI spec (bundesAPI/jobsuche-api); the Adzuna client follows Adzuna's documented response format but could not be checked against the live API from the build environment.
 - Seed career URLs are hints and were not verified against the live sites; discovery fills in the real career page on the first scan, and failures show up in the Admin page.
 - ATS adapters were tested against mock responses that follow the public API formats, not against every live tenant. Monitor the Admin page after the first scans.

@@ -25,17 +25,15 @@ import java.time.Duration;
  * on a fallback model chosen by the API.
  */
 @Component
-public class ClaudeClient {
+public class ClaudeClient implements AiClient {
     private static final Logger log = LoggerFactory.getLogger(ClaudeClient.class);
     static final String FALLBACK_BETA = "server-side-fallback-2026-07-01";
 
     private final AnthropicClient client;
     private final AppProperties.Ai cfg;
-    private final AiQuota quota;
 
-    public ClaudeClient(AppProperties props, AiQuota quota) {
+    public ClaudeClient(AppProperties props) {
         this.cfg = props.ai();
-        this.quota = quota;
         if (cfg.enabled()) {
             AnthropicOkHttpClient.Builder b = AnthropicOkHttpClient.builder().apiKey(cfg.apiKey()).timeout(Duration.ofMinutes(5));
             if (cfg.baseUrl() != null && !cfg.baseUrl().isBlank()) b.baseUrl(cfg.baseUrl());
@@ -45,10 +43,17 @@ public class ClaudeClient {
         }
     }
 
+    @Override
     public boolean enabled() {
         return client != null;
     }
 
+    @Override
+    public String provider() {
+        return "claude";
+    }
+
+    @Override
     public String model() {
         return cfg.model();
     }
@@ -56,14 +61,14 @@ public class ClaudeClient {
     /**
      * Sends one request and returns the parsed structured output.
      *
-     * @param userId user to charge against the daily quota, or null for system tasks
+     * @param userId unused here; the quota is charged by {@link AiRouter}
      */
+    @Override
     public <T> T structured(Long userId, String system, String userMessage, Class<T> type, long maxTokens) {
         if (!enabled()) {
             throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE,
                     "AI features are not configured on this server (ANTHROPIC_API_KEY missing).");
         }
-        if (userId != null) quota.consume(userId);
 
         StructuredMessageCreateParams<T> params = MessageCreateParams.builder()
                 .model(cfg.model())

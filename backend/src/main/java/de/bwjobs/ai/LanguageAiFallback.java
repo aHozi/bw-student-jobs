@@ -23,13 +23,13 @@ import java.util.List;
 public class LanguageAiFallback {
     private static final Logger log = LoggerFactory.getLogger(LanguageAiFallback.class);
 
-    private final ClaudeClient claude;
+    private final AiClient claude;
     private final JobRepository jobs;
     private final CompanyRepository companies;
     private final JdbcClient jdbc;
     private final AppProperties.Ai cfg;
 
-    public LanguageAiFallback(ClaudeClient claude, JobRepository jobs, CompanyRepository companies, JdbcClient jdbc, AppProperties props) {
+    public LanguageAiFallback(AiClient claude, JobRepository jobs, CompanyRepository companies, JdbcClient jdbc, AppProperties props) {
         this.claude = claude;
         this.jobs = jobs;
         this.companies = companies;

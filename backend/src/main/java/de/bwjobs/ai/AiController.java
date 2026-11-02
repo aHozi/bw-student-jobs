@@ -13,10 +13,10 @@ public class AiController {
     private final MatchScorer scorer;
     private final TailoringService tailoring;
     private final ProfileExtractor extractor;
-    private final ClaudeClient claude;
+    private final AiClient claude;
     private final AiQuota quota;
 
-    public AiController(MatchScorer scorer, TailoringService tailoring, ProfileExtractor extractor, ClaudeClient claude, AiQuota quota) {
+    public AiController(MatchScorer scorer, TailoringService tailoring, ProfileExtractor extractor, AiClient claude, AiQuota quota) {
         this.scorer = scorer;
         this.tailoring = tailoring;
         this.extractor = extractor;
@@ -27,7 +27,7 @@ public class AiController {
     @GetMapping("/ai/status")
     public Map<String, Object> status() {
         long uid = CurrentUser.id();
-        return Map.of("enabled", claude.enabled(), "model", claude.model(), "usedToday", quota.usedToday(uid), "dailyLimit", quota.limit());
+        return Map.of("enabled", claude.enabled(), "provider", claude.provider(), "model", String.valueOf(claude.model()), "usedToday", quota.usedToday(uid), "dailyLimit", quota.limit());
     }
 
     @PostMapping("/jobs/{id}/ai-score")

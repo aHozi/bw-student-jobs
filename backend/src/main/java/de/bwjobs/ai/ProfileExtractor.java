@@ -22,11 +22,11 @@ public class ProfileExtractor {
     private static final Pattern EMAIL = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}");
     private static final Pattern PHONE = Pattern.compile("(?:\\+49|0)[0-9 ()/-]{7,18}[0-9]");
 
-    private final ClaudeClient claude;
+    private final AiClient claude;
     private final DocumentService documents;
     private final ProfileRepository profiles;
 
-    public ProfileExtractor(ClaudeClient claude, DocumentService documents, ProfileRepository profiles) {
+    public ProfileExtractor(AiClient claude, DocumentService documents, ProfileRepository profiles) {
         this.claude = claude;
         this.documents = documents;
         this.profiles = profiles;
